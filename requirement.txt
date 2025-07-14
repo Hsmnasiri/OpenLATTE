@@ -1,0 +1,6 @@
+ghidra_bridge==0.3.*
+llama-cpp-python>=0.2.26
+transformers>=4.43
+accelerate
+fastapi uvicorn pytest
+networkx rich pydantic
