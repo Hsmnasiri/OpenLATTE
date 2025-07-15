@@ -1,8 +1,20 @@
+#first time:
+# python3 -m venv ~/llama-env
+# source ~/llama-env/bin/activate
+# pip install -U pip wheel
+# pip install "llama-cpp-python[server]==0.2.28" fastapi uvicorn pydantic
+
+
+#other times:
+# source ~/llama-env/bin/activate
+# export LLAMA_MODEL=/home/$USER/models/llama-2-7b/llama-2-7b-chat.Q4_K_M.gguf
+# uvicorn classify:app --host 127.0.0.1 --port 8123
+
 from fastapi import FastAPI
 from pydantic import BaseModel
 from llama_cpp import Llama
 import os, json
-
+import logging
 SINK_PROMPT_TEMPLATE="""
         As a program analyst, is it possible to use a call {func_name} as a sink when performing taint analysis? If so which parameters need to be checked for taint. 
         Please answer yes or no without additional explanation. If yes, please indicate the corresponding parameters. 
@@ -14,8 +26,34 @@ SOURCE_PROMPT_TEMPLATE = """
         If yes, please indicate the corresponding parameters. For example, the recv function call can be used as a taint source, and the second parameter as a buffer stores the input data as (recv; 2).
         """
 
-MODEL_PATH = os.getenv("LLAMA_MODEL", "llama-2-7b.Q4_K_M.gguf")
+SINK_PROMPT_TEMPLATE2 = """
+You are a program‑analysis assistant.
+Reply with **exactly one line** in one of the following forms:
 
+  (FUNC; N[,M,...])    # the 1‑based index/indices that must be checked
+  (NO)                 # if the call is NOT a sink
+
+<EXAMPLES>
+(system; 1)            # positive example  – system is a classic sink
+(atoi; NO)             # negative example – atoi is not a sink
+</EXAMPLES>
+
+<QUESTION>
+{func_name}
+</QUESTION>
+"""
+
+MODEL_PATH = os.getenv("LLAMA_MODEL")
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s  %(levelname)s  %(message)s",
+    handlers=[
+        logging.FileHandler("llm_calls.log", encoding="utf-8"),
+        logging.StreamHandler()
+    ]
+)
+# Initialize the LLM model
 llm = Llama(
     model_path=MODEL_PATH,
     n_ctx=2048,       # fits most extern-lists
@@ -31,18 +69,32 @@ class Q(BaseModel):
 
 @app.post("/check")
 def check(q: Q):
-    tmpl = SOURCE_PROMPT_TEMPLATE if q.mode == "source" else SINK_PROMPT_TEMPLATE
+    tmpl = SOURCE_PROMPT_TEMPLATE if q.mode == "source" else SINK_PROMPT_TEMPLATE2
     prompt = tmpl.format(func_name=q.func)
+    raw = llm(prompt,
+            max_tokens=256,
+            temperature=0.5,
+            stream=False)        
 
-    out = llm(prompt, max_tokens=32, temperature=0.0, stop=["\n"])
-    text = out["choices"][0]["text"].strip()
+    logging.info("==== LLM CALL ====================")
+    logging.info("PROMPT >\n%s", prompt)
+    logging.info("RAW    < %s", json.dumps(raw, ensure_ascii=False))
 
-    # valid answers:  "no"  or  "(recv; 2,3)"
-    result = {"is_true": text.lower().startswith("(")}
-    if result["is_true"]:
-        result["params"] = [
-            int(tok.strip()) for tok in text.strip("()").split(";")[1].split(",")
-        ]
-    else:
-        result["params"] = []
-    return result
+    txt = raw["choices"][0].get("text") \
+          or raw["choices"][0].get("message", {}).get("content", "")
+    answer = txt.strip()
+    logging.info("ANSWER < %s", answer)
+
+    is_true = answer.startswith("(") or answer.lower().startswith("yes")
+    params  = []
+    if is_true and "(" in answer and ";" in answer:
+        try:
+            inside = answer.strip("()")
+            _, plist = inside.split(";", 1)
+            params = [int(p.strip()) for p in plist.split(",") if p.strip().isdigit()]
+        except Exception as e:
+            logging.warning("parse‑error: %s", e)
+
+    return {"is_true": is_true, "params": params}
+
+
