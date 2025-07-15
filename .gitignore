@@ -15,5 +15,5 @@ __pycache__/
 *.idea/
 *.vscode-test/
 *.coverage
-/ghidra-workspace/
+
 *.gguf

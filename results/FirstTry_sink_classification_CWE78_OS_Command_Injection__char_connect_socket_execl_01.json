@@ -1,0 +1,247 @@
+[
+  {
+    "function": "free",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "recv",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "__libc_start_main",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "puts",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "iswxdigit",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "strlen",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "__stack_chk_fail",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "htons",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "strchr",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "printf",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "pthread_mutex_destroy",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "memset",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "close",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "srand",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "__isoc99_swscanf",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "inet_addr",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "time",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "pthread_mutex_unlock",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "pthread_exit",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "malloc",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "wprintf",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "__isoc99_sscanf",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "pthread_create",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "connect",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "pthread_join",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "execl",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "pthread_mutex_init",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "pthread_mutex_lock",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "rand",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "__ctype_b_loc",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "socket",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "__cxa_finalize",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "_ITM_deregisterTMCloneTable",
+    "sink_result": {
+      "is_true": false,
+      "params": []
+    }
+  },
+  {
+    "function": "_ITM_registerTMCloneTable",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  },
+  {
+    "function": "__gmon_start__",
+    "sink_result": {
+      "is_true": true,
+      "params": []
+    }
+  }
+]

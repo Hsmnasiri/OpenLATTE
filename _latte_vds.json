@@ -1,0 +1,98 @@
+[
+  {
+    "loc": "0010195a",
+    "sink": "printf",
+    "arg": "arg[2]",
+    "caller": "printIntLine"
+  },
+  {
+    "loc": "00101989",
+    "sink": "printf",
+    "arg": "arg[2]",
+    "caller": "printShortLine"
+  },
+  {
+    "loc": "001019c4",
+    "sink": "printf",
+    "arg": "arg[2]",
+    "caller": "printFloatLine"
+  },
+  {
+    "loc": "001019f2",
+    "sink": "printf",
+    "arg": "arg[2]",
+    "caller": "printLongLine"
+  },
+  {
+    "loc": "00101a20",
+    "sink": "printf",
+    "arg": "arg[2]",
+    "caller": "printLongLongLine"
+  },
+  {
+    "loc": "00101a4e",
+    "sink": "printf",
+    "arg": "arg[2]",
+    "caller": "printSizeTLine"
+  },
+  {
+    "loc": "00101a7c",
+    "sink": "printf",
+    "arg": "arg[2]",
+    "caller": "printHexCharLine"
+  },
+  {
+    "loc": "00101ac5",
+    "sink": "printf",
+    "arg": "arg[2]",
+    "caller": "printWcharLine"
+  },
+  {
+    "loc": "00101b04",
+    "sink": "printf",
+    "arg": "arg[2]",
+    "caller": "printUnsignedLine"
+  },
+  {
+    "loc": "00101b32",
+    "sink": "printf",
+    "arg": "arg[2]",
+    "caller": "printHexUnsignedCharLine"
+  },
+  {
+    "loc": "00101b63",
+    "sink": "printf",
+    "arg": "arg[2]",
+    "caller": "printDoubleLine"
+  },
+  {
+    "loc": "00101b99",
+    "sink": "printf",
+    "arg": "(register, 0x10, 8)",
+    "caller": "printStructLine"
+  },
+  {
+    "loc": "00101be1",
+    "sink": "printf",
+    "arg": "arg[2]",
+    "caller": "printBytesLine"
+  },
+  {
+    "loc": "001012a4",
+    "sink": "printf",
+    "arg": "arg[2]",
+    "caller": "printf"
+  },
+  {
+    "loc": "0010192f",
+    "sink": "wprintf",
+    "arg": "arg[2]",
+    "caller": "printWLine"
+  },
+  {
+    "loc": "00101354",
+    "sink": "wprintf",
+    "arg": "arg[2]",
+    "caller": "wprintf"
+  }
+]
