@@ -2,7 +2,7 @@
 # @category Ghidrathon/Utils
 
 import os
-
+import json
 def main():
     # 1) grab the Program object
     program = currentProgram()
@@ -15,15 +15,16 @@ def main():
 
     funcs = program.getFunctionManager().getExternalFunctions()
     count = 0
-    with open(out_path, "w") as fw:
-        for func in funcs:
-            try:
-                # full prototype: return type, name, params
-                sig = func.getSignature(True)
-            except Exception:
-                sig = func.getName() + "()"
-            fw.write(f"{func.getName()} : {sig}\n")
-            count += 1
+    out = []
+    
+    for f in funcs:
+        proto = f.getPrototypeString(False, False)
+        out.append({"name": f.getName(), "addr": hex(f.getEntryPoint().getOffset()),
+                    "proto": proto})
+
+    with open(out_path, "w") as fp:
+        json.dump(out, fp, indent=2)
+
 
     print(f"Wrote {count} external function signatures to {out_path}")
 

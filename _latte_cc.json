@@ -1,100 +1,117 @@
 [
   [
-    "printIntLine"
+    "FUN_0010186b",
+    "FUN_001013c9",
+    "FUN_00101676"
   ],
   [
-    "printShortLine"
+    "FUN_0010186b",
+    "FUN_00101451",
+    "FUN_00101643",
+    "FUN_00101676"
   ],
   [
-    "printFloatLine"
+    "FUN_0010174c"
   ],
   [
-    "printLongLine"
+    "FUN_00101777"
   ],
   [
-    "printLongLongLine"
+    "FUN_001017a6"
   ],
   [
-    "printSizeTLine"
+    "FUN_001017e1"
   ],
   [
-    "printHexCharLine"
+    "FUN_0010180f"
   ],
   [
-    "printWcharLine"
+    "FUN_0010183d"
   ],
   [
-    "printUnsignedLine"
+    "FUN_00101899"
   ],
   [
-    "printHexUnsignedCharLine"
+    "FUN_001018f6"
   ],
   [
-    "printDoubleLine"
+    "FUN_00101921"
   ],
   [
-    "printStructLine"
+    "FUN_0010194f"
   ],
   [
-    "printBytesLine"
+    "FUN_00101980"
   ],
   [
-    "printf",
-    "printIntLine"
-  ],
-  [
-    "printf",
-    "printShortLine"
-  ],
-  [
-    "printf",
-    "printFloatLine"
+    "FUN_001019b6"
   ],
   [
     "printf",
-    "printLongLine"
+    "FUN_0010186b",
+    "FUN_001013c9",
+    "FUN_00101676"
   ],
   [
     "printf",
-    "printLongLongLine"
+    "FUN_0010186b",
+    "FUN_00101451",
+    "FUN_00101643",
+    "FUN_00101676"
   ],
   [
     "printf",
-    "printSizeTLine"
+    "FUN_0010174c"
   ],
   [
     "printf",
-    "printHexCharLine"
+    "FUN_00101777"
   ],
   [
     "printf",
-    "printWcharLine"
+    "FUN_001017a6"
   ],
   [
     "printf",
-    "printUnsignedLine"
+    "FUN_001017e1"
   ],
   [
     "printf",
-    "printHexUnsignedCharLine"
+    "FUN_0010180f"
   ],
   [
     "printf",
-    "printDoubleLine"
+    "FUN_0010183d"
   ],
   [
     "printf",
-    "printStructLine"
+    "FUN_00101899"
   ],
   [
     "printf",
-    "printBytesLine"
+    "FUN_001018f6"
   ],
   [
-    "printWLine"
+    "printf",
+    "FUN_00101921"
+  ],
+  [
+    "printf",
+    "FUN_0010194f"
+  ],
+  [
+    "printf",
+    "FUN_00101980"
+  ],
+  [
+    "printf",
+    "FUN_001019b6"
+  ],
+  [
+    "FUN_00101717"
   ],
   [
     "wprintf",
-    "printWLine"
+    "FUN_00101717"
   ]
 ]

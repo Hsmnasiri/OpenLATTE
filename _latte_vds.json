@@ -1,98 +1,98 @@
 [
   {
-    "loc": "0010195a",
+    "loc": "00101891",
     "sink": "printf",
-    "arg": "arg[2]",
-    "caller": "printIntLine"
+    "arg": "(register, 0x30, 8)",
+    "caller": "FUN_0010186b"
   },
   {
-    "loc": "00101989",
+    "loc": "0010176f",
     "sink": "printf",
-    "arg": "arg[2]",
-    "caller": "printShortLine"
+    "arg": "(register, 0x30, 8)",
+    "caller": "FUN_0010174c"
   },
   {
-    "loc": "001019c4",
+    "loc": "0010179e",
     "sink": "printf",
-    "arg": "arg[2]",
-    "caller": "printFloatLine"
+    "arg": "(register, 0x30, 8)",
+    "caller": "FUN_00101777"
   },
   {
-    "loc": "001019f2",
+    "loc": "001017d9",
     "sink": "printf",
-    "arg": "arg[2]",
-    "caller": "printLongLine"
+    "arg": "(register, 0x1240, 8)",
+    "caller": "FUN_001017a6"
   },
   {
-    "loc": "00101a20",
+    "loc": "00101807",
     "sink": "printf",
-    "arg": "arg[2]",
-    "caller": "printLongLongLine"
+    "arg": "(register, 0x38, 8)",
+    "caller": "FUN_001017e1"
   },
   {
-    "loc": "00101a4e",
+    "loc": "00101835",
     "sink": "printf",
-    "arg": "arg[2]",
-    "caller": "printSizeTLine"
+    "arg": "(register, 0x38, 8)",
+    "caller": "FUN_0010180f"
   },
   {
-    "loc": "00101a7c",
+    "loc": "00101863",
     "sink": "printf",
-    "arg": "arg[2]",
-    "caller": "printHexCharLine"
+    "arg": "(register, 0x38, 8)",
+    "caller": "FUN_0010183d"
   },
   {
-    "loc": "00101ac5",
+    "loc": "001018da",
     "sink": "printf",
-    "arg": "arg[2]",
-    "caller": "printWcharLine"
+    "arg": "(unique, 0x4700, 8)",
+    "caller": "FUN_00101899"
   },
   {
-    "loc": "00101b04",
+    "loc": "00101919",
     "sink": "printf",
-    "arg": "arg[2]",
-    "caller": "printUnsignedLine"
+    "arg": "(register, 0x30, 8)",
+    "caller": "FUN_001018f6"
   },
   {
-    "loc": "00101b32",
+    "loc": "00101947",
     "sink": "printf",
-    "arg": "arg[2]",
-    "caller": "printHexUnsignedCharLine"
+    "arg": "(register, 0x30, 8)",
+    "caller": "FUN_00101921"
   },
   {
-    "loc": "00101b63",
+    "loc": "00101978",
     "sink": "printf",
-    "arg": "arg[2]",
-    "caller": "printDoubleLine"
+    "arg": "(register, 0x1200, 8)",
+    "caller": "FUN_0010194f"
   },
   {
-    "loc": "00101b99",
+    "loc": "001019ae",
     "sink": "printf",
-    "arg": "(register, 0x10, 8)",
-    "caller": "printStructLine"
+    "arg": "(register, 0x30, 8)",
+    "caller": "FUN_00101980"
   },
   {
-    "loc": "00101be1",
+    "loc": "001019f6",
     "sink": "printf",
-    "arg": "arg[2]",
-    "caller": "printBytesLine"
+    "arg": "(register, 0x30, 8)",
+    "caller": "FUN_001019b6"
   },
   {
-    "loc": "001012a4",
+    "loc": "001011e4",
     "sink": "printf",
-    "arg": "arg[2]",
+    "arg": "arg[1]",
     "caller": "printf"
   },
   {
-    "loc": "0010192f",
+    "loc": "00101744",
     "sink": "wprintf",
-    "arg": "arg[2]",
-    "caller": "printWLine"
+    "arg": "(register, 0x38, 8)",
+    "caller": "FUN_00101717"
   },
   {
-    "loc": "00101354",
+    "loc": "00101264",
     "sink": "wprintf",
-    "arg": "arg[2]",
+    "arg": "arg[1]",
     "caller": "wprintf"
   }
 ]

@@ -152,7 +152,7 @@ def _dfs_callers(fn, path, out_chains, seen, depth, max_depth):
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    sink_json = "./results/Modified_sink_classification_CWE78_OS_Command_Injection__char_connect_socket_execl_01.json"
+    sink_json = "./results/sink_classification_CWE190_Integer_Overflow__char_fscanf_preinc_05.json"
     sink_spec = load_sink_spec(sink_json)
     print(f"[*] Loaded {len(sink_spec)} sink specifications from {sink_json}")
     print(f"[*] Sinks: {', '.join(sink_spec.keys())}")

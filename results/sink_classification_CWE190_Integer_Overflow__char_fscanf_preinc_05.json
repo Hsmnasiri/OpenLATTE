@@ -1,0 +1,40 @@
+[
+  {
+    "function": "printf",
+    "addr": "0x7",
+    "proto": "int printf(char * __format, ...)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1,
+        2
+      ],
+      "answer": "(printf; 1,2)"
+    }
+  },
+  {
+    "function": "pthread_mutex_unlock",
+    "addr": "0xc",
+    "proto": "int pthread_mutex_unlock(pthread_mutex_t * __mutex)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "(pthread_mutex_unlock; 1)"
+    }
+  },
+  {
+    "function": "wprintf",
+    "addr": "0xf",
+    "proto": "int wprintf(wchar_t * __format, ...)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1,
+        2
+      ],
+      "answer": "(wprintf; 1,2)"
+    }
+  }
+]
