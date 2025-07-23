@@ -1,0 +1,68 @@
+[
+  {
+    "sink_function": "printf",
+    "sink_location": "00101891",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101503",
+        "call_location": "00101577",
+        "callee_func": "FUN_0010186b",
+        "code": "\nvoid FUN_00101503(void)\n\n{\n  long in_FS_OFFSET;\n  char local_12;\n  char local_11;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  local_12 = ' ';\n  if (DAT_00104010 != 0) {\n    __isoc99_fscanf(stdin,&DAT_00102008,&local_12);\n  }\n  if (DAT_00104010 != 0) {\n    if (local_12 == '\\x7f') {\n      FUN_001016f1(\"data value is too large to perform arithmetic safely.\");\n    }\n    else {\n      local_12 = local_12 + '\\x01';\n      local_11 = local_12;\n      FUN_0010186b((int)local_12);\n    }\n  }\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
+      },
+      {
+        "caller_func": "FUN_0010186b",
+        "call_location": "00101891",
+        "callee_func": "printf",
+        "code": "\nvoid FUN_0010186b(char param_1)\n\n{\n  printf(\"%02x\\n\",(ulong)(uint)(int)param_1);\n  return;\n}\n\n"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "__isoc99_fscanf",
+      "called_from_function": "FUN_00101503"
+    }
+  },
+  {
+    "sink_function": "printf",
+    "sink_location": "00101891",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_001013c9",
+        "call_location": "00101435",
+        "callee_func": "FUN_0010186b",
+        "code": "\nvoid FUN_001013c9(void)\n\n{\n  long in_FS_OFFSET;\n  char local_12;\n  char local_11;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  local_12 = ' ';\n  if (DAT_00104010 != 0) {\n    __isoc99_fscanf(stdin,&DAT_00102008,&local_12);\n  }\n  if (DAT_00104010 != 0) {\n    local_12 = local_12 + '\\x01';\n    local_11 = local_12;\n    FUN_0010186b((int)local_12);\n  }\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
+      },
+      {
+        "caller_func": "FUN_0010186b",
+        "call_location": "00101891",
+        "callee_func": "printf",
+        "code": "\nvoid FUN_0010186b(char param_1)\n\n{\n  printf(\"%02x\\n\",(ulong)(uint)(int)param_1);\n  return;\n}\n\n"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "__isoc99_fscanf",
+      "called_from_function": "FUN_001013c9"
+    }
+  },
+  {
+    "sink_function": "printf",
+    "sink_location": "00101891",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101451",
+        "call_location": "001014d6",
+        "callee_func": "FUN_0010186b",
+        "code": "\nvoid FUN_00101451(void)\n\n{\n  long in_FS_OFFSET;\n  char local_12;\n  char local_11;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  local_12 = ' ';\n  if (DAT_00104010 != 0) {\n    __isoc99_fscanf(stdin,&DAT_00102008,&local_12);\n  }\n  if (DAT_0010402c == 0) {\n    if (local_12 == '\\x7f') {\n      FUN_001016f1(\"data value is too large to perform arithmetic safely.\");\n    }\n    else {\n      local_12 = local_12 + '\\x01';\n      local_11 = local_12;\n      FUN_0010186b((int)local_12);\n    }\n  }\n  else {\n    FUN_001016f1(\"Benign, fixed string\");\n  }\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
+      },
+      {
+        "caller_func": "FUN_0010186b",
+        "call_location": "00101891",
+        "callee_func": "printf",
+        "code": "\nvoid FUN_0010186b(char param_1)\n\n{\n  printf(\"%02x\\n\",(ulong)(uint)(int)param_1);\n  return;\n}\n\n"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "__isoc99_fscanf",
+      "called_from_function": "FUN_00101451"
+    }
+  }
+]
