@@ -51,8 +51,8 @@ generator = pipeline(
     model=model,
     tokenizer=tokenizer,
     device_map={"": "cpu"},
-    max_length=512,
-    temperature=0.0,
+    max_length=256,
+    temperature=0.5,
     do_sample=False,
     repetition_penalty=1.1,
     return_full_text=False
@@ -88,9 +88,11 @@ FUNCTION: {func_name}
         """
  
 SOURCE_PROMPT_TEMPLATE = """
-        As a program analyst, is it possible to use a call to {func_name} as a starting point (source) for taint analysis? 
+        As a program analyst, is it possible to use a call to "{func_name} function" as a starting point (source) for taint analysis? 
         If the function can be used as a taint source, which parameter in the call stores the external input data. Please answer yes or no without additional explanation. 
         If yes, please indicate the corresponding parameters. For example, the recv function call can be used as a taint source, and the second parameter as a buffer stores the input data as (recv; 2).
+        (FUNC; N[,M])   ← if it is a source, where N, M are the 1-based parameter indices  
+        (NO)            ← if it is not a source  
         """
 # Classification logic
 def classify_cpu(prompt: str) -> dict:

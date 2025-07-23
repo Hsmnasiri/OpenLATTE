@@ -1,0 +1,62 @@
+[
+  {
+    "sink_function": "printf",
+    "sink_location": "00101891",
+    "flow_trace": [
+      {
+        "caller_func": "goodB2G2",
+        "call_location": "00101577",
+        "callee_func": "printHexCharLine"
+      },
+      {
+        "caller_func": "printHexCharLine",
+        "call_location": "00101891",
+        "callee_func": "printf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "__isoc99_fscanf",
+      "called_from_function": "goodB2G2"
+    }
+  },
+  {
+    "sink_function": "printf",
+    "sink_location": "00101891",
+    "flow_trace": [
+      {
+        "caller_func": "CWE190_Integer_Overflow__char_fscanf_preinc_05_bad",
+        "call_location": "00101435",
+        "callee_func": "printHexCharLine"
+      },
+      {
+        "caller_func": "printHexCharLine",
+        "call_location": "00101891",
+        "callee_func": "printf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "__isoc99_fscanf",
+      "called_from_function": "CWE190_Integer_Overflow__char_fscanf_preinc_05_bad"
+    }
+  },
+  {
+    "sink_function": "printf",
+    "sink_location": "00101891",
+    "flow_trace": [
+      {
+        "caller_func": "goodB2G1",
+        "call_location": "001014d6",
+        "callee_func": "printHexCharLine"
+      },
+      {
+        "caller_func": "printHexCharLine",
+        "call_location": "00101891",
+        "callee_func": "printf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "__isoc99_fscanf",
+      "called_from_function": "goodB2G1"
+    }
+  }
+]

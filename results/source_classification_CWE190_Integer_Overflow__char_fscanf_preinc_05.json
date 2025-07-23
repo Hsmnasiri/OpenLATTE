@@ -1,0 +1,74 @@
+[
+  {
+    "function": "iswxdigit",
+    "addr": "0x5",
+    "proto": "int iswxdigit(wint_t __wc)",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "FUNC: iswxdigit\n\nYes, the `iswxdigit` function can be used as a taint source. The only parameter this function takes is a single character, so there's no need to specify any particular index.\n\n(iswxdigit; 1)"
+    }
+  },
+  {
+    "function": "srand",
+    "addr": "0x9",
+    "proto": "void srand(uint __seed)",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "FUNC: srand\n        PARAMETERS: seed\n        ANSWER: (YES; 1)"
+    }
+  },
+  {
+    "function": "malloc",
+    "addr": "0xe",
+    "proto": "void * malloc(size_t __size)",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "FUNC: malloc(size_t size);\n\nYes, the malloc function call can be used as a taint source. The first parameter,'size', stores the external input data that determines the amount of memory to allocate. Therefore, the corresponding parameters are (FUNC; 1)."
+    }
+  },
+  {
+    "function": "__isoc99_sscanf",
+    "addr": "0x10",
+    "proto": "undefined __isoc99_sscanf()",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "FUNC: \"__isoc99_sscanf\"\n\nYes, the __isoc99_sscanf function can be used as a taint source. The first parameter is the destination buffer that stores the parsed data from the input string, so it is the parameter of interest. Therefore, the taint index would be (FUNC; 1)."
+    }
+  },
+  {
+    "function": "__ctype_b_loc",
+    "addr": "0x16",
+    "proto": "ushort * * __ctype_b_loc(void)",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "FUNC: \"__ctype_b_loc\"\n\nYes, the \"__ctype_b_loc\" function can be used as a taint source in taint analysis. The first parameter of this function represents the input character to be analyzed. Therefore, the parameter index for this function would be 1.\n\n(FUNC; 1)"
+    }
+  },
+  {
+    "function": "__isoc99_fscanf",
+    "addr": "0x18",
+    "proto": "int __isoc99_fscanf(FILE * __stream, const char * __format, ...)",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "FUNC: \"__isoc99_fscanf\"\n\nYes, the `__isoc99_fscanf` function can be used as a taint source. The first parameter is the input stream from which data is read, and it is the parameter of interest. Therefore, the taint index would be (FUNC; 1)."
+    }
+  }
+]
