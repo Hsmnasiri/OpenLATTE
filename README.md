@@ -1,6 +1,6 @@
 # OpenLATTE
 
-OpenLATTE is a reimplementation of the [LATTE](https://dl.acm.org/doi/10.1145/3711816) static analysis pipeline for discovering vulnerabilities in stripped binaries.  The project automates the three major phases described in the paper:
+OpenLATTE is a reimplementation of the [LATTE](https://dl.acm.org/doi/10.1145/3711816) (LLM-Powered Static Binary Taint Analysis) static analysis pipeline for discovering vulnerabilities in stripped binaries.  The project automates the three major phases described in the paper:
 
 1. **Function classification** – external library calls are labelled as potential taint sources or sinks using an LLM.
 2. **Flow extraction** – Ghidra scripts identify vulnerable destinations and build call chains that trace the flow of tainted data.
