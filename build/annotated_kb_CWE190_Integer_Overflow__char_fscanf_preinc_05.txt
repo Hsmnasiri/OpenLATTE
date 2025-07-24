@@ -1,0 +1,69 @@
+CWE_ID: CWE-190
+Vulnerable_Function_Decompiled:
+
+void FUN_001013c9(void)
+
+{
+  long in_FS_OFFSET;
+  char local_12;
+  char local_11;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  local_12 = ' ';
+  if (DAT_00104010 != 0) {
+    __isoc99_fscanf(stdin,&DAT_00102008,&local_12);
+  }
+  if (DAT_00104010 != 0) {
+    local_12 = local_12 + '\x01';
+    local_11 = local_12;
+    FUN_0010186b((int)local_12);
+  }
+  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {
+                    /* WARNING: Subroutine does not return */
+    __stack_chk_fail();
+  }
+  return;
+}
+
+
+---
+Patched_Function_Decompiled:
+
+void FUN_00101451(void)
+
+{
+  long in_FS_OFFSET;
+  char local_12;
+  char local_11;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  local_12 = ' ';
+  if (DAT_00104010 != 0) {
+    __isoc99_fscanf(stdin,&DAT_00102008,&local_12);
+  }
+  if (DAT_0010402c == 0) {
+    if (local_12 == '\x7f') {
+      FUN_001016f1("data value is too large to perform arithmetic safely.");
+    }
+    else {
+      local_12 = local_12 + '\x01';
+      local_11 = local_12;
+      FUN_0010186b((int)local_12);
+    }
+  }
+  else {
+    FUN_001016f1("Benign, fixed string");
+  }
+  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {
+                    /* WARNING: Subroutine does not return */
+    __stack_chk_fail();
+  }
+  return;
+}
+
+
+---
+LLM_Annotation_Root_Cause: "The vulnerability in this C code lies in the format string issue during input validation. Specifically, the function `__isoc99_fscanf(stdin,&DAT_00102008,&local_12)` allows user-supplied data to be used as a format string, which can lead to buffer overflows or other format string attacks if the supplied data is maliciously crafted."
+LLM_Annotation_Patch: "This version of the code fixes the potential buffer overflow vulnerability by adding a check to ensure that the value read from `stdin` does not exceed its intended boundary before performing arithmetic operations. Specifically, it checks if the value is equal to '\x7f' (127 in decimal), which is one less than the typical size of a character buffer, and raises an error message if this condition is met. This prevents out-of-bounds writing and fixes the vulnerability."
