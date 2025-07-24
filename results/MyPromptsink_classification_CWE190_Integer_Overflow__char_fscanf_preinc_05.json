@@ -1,0 +1,136 @@
+[
+  {
+    "function": "free",
+    "addr": "0x1",
+    "proto": "void free(void * __ptr)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "(free; 1)"
+    }
+  },
+  {
+    "function": "__isoc99_fscanf",
+    "addr": "0x3",
+    "proto": "undefined __isoc99_fscanf()",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        2,
+        3
+      ],
+      "answer": "(__isoc99_fscanf; 2,3)"
+    }
+  },
+  {
+    "function": "printf",
+    "addr": "0x7",
+    "proto": "int printf(char * __format, ...)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "(printf; 1)"
+    }
+  },
+  {
+    "function": "__isoc99_swscanf",
+    "addr": "0xa",
+    "proto": "undefined __isoc99_swscanf()",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        2
+      ],
+      "answer": "(__isoc99_swscanf; 2)"
+    }
+  },
+  {
+    "function": "time",
+    "addr": "0xb",
+    "proto": "time_t time(time_t * __timer)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "(time; 1)"
+    }
+  },
+  {
+    "function": "malloc",
+    "addr": "0xe",
+    "proto": "void * malloc(size_t __size)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "(malloc; 1)"
+    }
+  },
+  {
+    "function": "wprintf",
+    "addr": "0xf",
+    "proto": "int wprintf(wchar_t * __format, ...)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "(wprintf; 1)"
+    }
+  },
+  {
+    "function": "__isoc99_sscanf",
+    "addr": "0x10",
+    "proto": "undefined __isoc99_sscanf()",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        2
+      ],
+      "answer": "(__isoc99_sscanf; 2)"
+    }
+  },
+  {
+    "function": "pthread_create",
+    "addr": "0x11",
+    "proto": "int pthread_create(pthread_t * __newthread, pthread_attr_t * __attr, __start_routine * __start_routine, void * __arg)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        2,
+        3
+      ],
+      "answer": "`(pthread_create; 2,3)`"
+    }
+  },
+  {
+    "function": "pthread_join",
+    "addr": "0x12",
+    "proto": "int pthread_join(pthread_t __th, void * * __thread_return)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        2
+      ],
+      "answer": "`(pthread_join; 2)`"
+    }
+  },
+  {
+    "function": "__cxa_finalize",
+    "addr": "0x17",
+    "proto": "undefined __cxa_finalize()",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "(__cxa_finalize; 1)"
+    }
+  }
+]

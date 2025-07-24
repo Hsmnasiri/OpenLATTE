@@ -1,0 +1,62 @@
+[
+  {
+    "function": "puts",
+    "addr": "0x4",
+    "proto": "int puts(char * __s)",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "(puts; 1)"
+    }
+  },
+  {
+    "function": "__isoc99_swscanf",
+    "addr": "0xa",
+    "proto": "undefined __isoc99_swscanf()",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        2
+      ],
+      "answer": "(__isoc99_swscanf; 2)"
+    }
+  },
+  {
+    "function": "wprintf",
+    "addr": "0xf",
+    "proto": "int wprintf(wchar_t * __format, ...)",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "(wprintf; 1)"
+    }
+  },
+  {
+    "function": "__isoc99_sscanf",
+    "addr": "0x10",
+    "proto": "undefined __isoc99_sscanf()",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "(__isoc99_sscanf; 1)"
+    }
+  },
+  {
+    "function": "pthread_create",
+    "addr": "0x11",
+    "proto": "int pthread_create(pthread_t * __newthread, pthread_attr_t * __attr, __start_routine * __start_routine, void * __arg)",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        2
+      ],
+      "answer": "(pthread_create; 2)"
+    }
+  }
+]

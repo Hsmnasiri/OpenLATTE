@@ -1,14 +1,14 @@
 [
   {
-    "function": "__isoc99_fscanf",
-    "addr": "0x3",
-    "proto": "undefined __isoc99_fscanf()",
+    "function": "free",
+    "addr": "0x1",
+    "proto": "void free(void * __ptr)",
     "sink_result": {
       "is_true": true,
       "params": [
-        2
+        1
       ],
-      "answer": "Yes\n(__isoc99_fscanf; 2)"
+      "answer": "(free; 1)"
     }
   },
   {
@@ -20,19 +20,31 @@
       "params": [
         1
       ],
-      "answer": "Yes, (puts; 1)"
+      "answer": "(puts; 1)"
     }
   },
   {
-    "function": "printf",
-    "addr": "0x7",
-    "proto": "int printf(char * __format, ...)",
+    "function": "iswxdigit",
+    "addr": "0x5",
+    "proto": "int iswxdigit(wint_t __wc)",
     "sink_result": {
       "is_true": true,
       "params": [
         1
       ],
-      "answer": "Yes, (printf; 1)"
+      "answer": "(iswxdigit; 1)"
+    }
+  },
+  {
+    "function": "__stack_chk_fail",
+    "addr": "0x6",
+    "proto": "undefined __stack_chk_fail()",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "(__stack_chk_fail; 1)"
     }
   },
   {
@@ -44,7 +56,7 @@
       "params": [
         1
       ],
-      "answer": "Yes, (pthread_mutex_destroy; 1)"
+      "answer": "(pthread_mutex_destroy; 1)"
     }
   },
   {
@@ -56,19 +68,19 @@
       "params": [
         1
       ],
-      "answer": "Yes, (srand; 1)"
+      "answer": "(srand; 1)"
     }
   },
   {
-    "function": "__isoc99_swscanf",
-    "addr": "0xa",
-    "proto": "undefined __isoc99_swscanf()",
+    "function": "time",
+    "addr": "0xb",
+    "proto": "time_t time(time_t * __timer)",
     "sink_result": {
       "is_true": true,
       "params": [
-        2
+        3
       ],
-      "answer": "Yes\n(__isoc99_swscanf; 2)"
+      "answer": "(time; 3)"
     }
   },
   {
@@ -80,31 +92,7 @@
       "params": [
         1
       ],
-      "answer": "Yes\n(pthread_mutex_unlock; 1)"
-    }
-  },
-  {
-    "function": "pthread_exit",
-    "addr": "0xd",
-    "proto": "void pthread_exit(void * __retval)",
-    "sink_result": {
-      "is_true": true,
-      "params": [
-        1
-      ],
-      "answer": "Yes, (pthread_exit; 1)"
-    }
-  },
-  {
-    "function": "malloc",
-    "addr": "0xe",
-    "proto": "void * malloc(size_t __size)",
-    "sink_result": {
-      "is_true": true,
-      "params": [
-        1
-      ],
-      "answer": "Yes, (malloc; 1)"
+      "answer": "(pthread_mutex_unlock; 1)"
     }
   },
   {
@@ -116,7 +104,7 @@
       "params": [
         1
       ],
-      "answer": "Yes, (wprintf; 1)"
+      "answer": "(wprintf; 1)"
     }
   },
   {
@@ -126,21 +114,9 @@
     "sink_result": {
       "is_true": true,
       "params": [
-        2
+        1
       ],
-      "answer": "yes; (__isoc99_sscanf; 2)"
-    }
-  },
-  {
-    "function": "pthread_create",
-    "addr": "0x11",
-    "proto": "int pthread_create(pthread_t * __newthread, pthread_attr_t * __attr, __start_routine * __start_routine, void * __arg)",
-    "sink_result": {
-      "is_true": true,
-      "params": [
-        3
-      ],
-      "answer": "Yes\n(pthread_create; 3), (pthread_create; 4)"
+      "answer": "(__isoc99_sscanf; 1)"
     }
   },
   {
@@ -152,7 +128,7 @@
       "params": [
         2
       ],
-      "answer": "Yes\n(pthread_join; 2)"
+      "answer": "(pthread_join; 2)"
     }
   },
   {
@@ -162,9 +138,9 @@
     "sink_result": {
       "is_true": true,
       "params": [
-        1
+        2
       ],
-      "answer": "Yes, (pthread_mutex_init; 1), (pthread_mutex_init; 2)"
+      "answer": "(pthread_mutex_init; 2)"
     }
   },
   {
@@ -174,9 +150,21 @@
     "sink_result": {
       "is_true": true,
       "params": [
+        2
+      ],
+      "answer": "(pthread_mutex_lock; 2)"
+    }
+  },
+  {
+    "function": "__cxa_finalize",
+    "addr": "0x17",
+    "proto": "undefined __cxa_finalize()",
+    "sink_result": {
+      "is_true": true,
+      "params": [
         1
       ],
-      "answer": "Yes, (pthread_mutex_lock; 1)"
+      "answer": "(__cxa_finalize; 1)"
     }
   }
 ]
