@@ -4,15 +4,28 @@
 inspect_flows_with_llm.py - Implements LATTE Phase 3: Prompt Sequence Construction.
 
 This script takes the output from the Ghidra analysis (flows_with_code.json)
-and converses with a local Ollama LLM to get a final vulnerability judgment.
+and converses with an LLM (either local Ollama or Google Gemini) to get a
+final vulnerability judgment.
 """
 import json
 import requests
 import argparse
+import os
+import time
+import google.generativeai as genai
+from dotenv import load_dotenv
+load_dotenv()
+# --- LLM Configuration ---
 
-# --- Ollama Configuration ---
+# -- Ollama (Local) --
 OLLAMA_API_URL = "http://localhost:11434/api/chat"
 OLLAMA_MODEL = "mistral" # The model you downloaded with `ollama pull`
+
+# -- Gemini (Cloud) --
+# IMPORTANT: Replace "YOUR_API_KEY" with your actual Google AI Studio API key.
+# You can also set this as an environment variable named GOOGLE_API_KEY.
+GEMINI_API_KEY = os.getenv("GOOGLE_API_KEY42", "YOUR_API_KEY")
+GEMINI_MODEL = 'gemini-1.5-pro' # Use the powerful Pro model for this complex task
 
 # --- Prompt Templates from LATTE Paper (Figure 10) ---
 
@@ -67,11 +80,70 @@ def query_ollama(messages):
         print("Please ensure Ollama is running and you have pulled the model with 'ollama pull {}'".format(OLLAMA_MODEL))
         return None
 
+def query_gemini(messages, retries=3):
+    """
+    Sends the entire conversation history to the Gemini API and gets the next response.
+    """
+    print("--- Sending Prompt to Gemini ---")
+    print(messages[-1]['content'])
+    
+    if GEMINI_API_KEY == "YOUR_API_KEY":
+        print("[FATAL] Please replace 'YOUR_API_KEY' with your actual Google Gemini API key.")
+        return None
+
+    genai.configure(api_key=GEMINI_API_KEY)
+    model = genai.GenerativeModel(GEMINI_MODEL)
+    
+    # --- FIX: Reformat the message history to the structure Gemini API expects ---
+    gemini_messages = []
+    for msg in messages:
+        # Skip the system message, as it's not used in the same way by Gemini
+        if msg['role'] == 'system':
+            continue
+        
+        # Translate role from 'assistant' (Ollama) to 'model' (Gemini)
+        role = 'model' if msg['role'] == 'assistant' else 'user'
+        
+        # Reformat the dictionary to the required {'role': ..., 'parts': [...]} structure
+        gemini_messages.append({'role': role, 'parts': [msg['content']]})
+    # --- END FIX ---
+
+    for attempt in range(retries):
+        try:
+            safety_settings = {
+                'HARM_CATEGORY_HARASSMENT': 'BLOCK_NONE',
+                'HARM_CATEGORY_HATE_SPEECH': 'BLOCK_NONE',
+                'HARM_CATEGORY_SEXUALLY_EXPLICIT': 'BLOCK_NONE',
+                'HARM_CATEGORY_DANGEROUS_CONTENT': 'BLOCK_NONE',
+            }
+            # Use the correctly formatted message history
+            response = model.generate_content(gemini_messages, safety_settings=safety_settings)
+            response_text = response.text.strip()
+            
+            print("--- Gemini Response ---")
+            print(response_text + "\n")
+
+            # Add a delay to respect the API rate limit
+            time.sleep(4.1)
+            return response_text
+
+        except Exception as e:
+            print(f"[WARN] Gemini API call failed on attempt {attempt + 1}/{retries}: {e}")
+            if attempt < retries - 1:
+                time.sleep(5 * (attempt + 1))
+            else:
+                return f"API Error after {retries} attempts: {e}"
+    
+    return None
+
+
 def main():
     parser = argparse.ArgumentParser(description="LATTE Phase 3: Inspect dangerous flows with an LLM.")
     parser.add_argument('--flows-with-code', required=True, help="Path to the flows_with_code.json file.")
     parser.add_argument('--sources', required=True, help="Path to the source classification JSON file.")
     parser.add_argument('--output', required=True, help="Path to save the final vulnerability reports.")
+    parser.add_argument('--llm-mode', choices=['local', 'gemini'], default='local', 
+                        help="The LLM mode to use: 'local' for Ollama or 'gemini' for Google Gemini.")
     args = parser.parse_args()
 
     with open(args.flows_with_code, 'r') as f:
@@ -82,13 +154,16 @@ def main():
     vulnerability_reports = []
 
     for i, flow in enumerate(dangerous_flows):
-        print(f"--- Analyzing Flow #{i+1} / {len(dangerous_flows)} ---")
+        print(f"--- Analyzing Flow #{i+1} / {len(dangerous_flows)} using {args.llm_mode.upper()} mode ---")
         
         # Initialize the conversation for this flow
         messages = [{'role': 'system', 'content': 'You are a helpful and concise C security analyst.'}]
         
         funcs_in_trace = list(dict.fromkeys([step['caller_func'] for step in flow['flow_trace']]))
         
+        # Determine which query function to use based on the mode
+        query_llm = query_gemini if args.llm_mode == 'gemini' else query_ollama
+
         # 1. Start Prompt
         start_func_name = funcs_in_trace[0]
         source_func_name = flow['source_info']['source_function_called']
@@ -98,7 +173,7 @@ def main():
         start_prompt = START_PROMPT_TEMPLATE.format(function=source_func_name, parameter=str(source_params), code=code_for_start_prompt)
         messages.append({'role': 'user', 'content': start_prompt})
         
-        response = query_ollama(messages)
+        response = query_llm(messages)
         if response is None: continue # Skip flow if API fails
         messages.append({'role': 'assistant', 'content': response})
 
@@ -109,13 +184,13 @@ def main():
                 middle_prompt = MIDDLE_PROMPT_TEMPLATE.format(code=code_for_middle_prompt)
                 messages.append({'role': 'user', 'content': middle_prompt})
                 
-                response = query_ollama(messages)
+                response = query_llm(messages)
                 if response is None: break
                 messages.append({'role': 'assistant', 'content': response})
         
         # 3. End Prompt
         messages.append({'role': 'user', 'content': END_PROMPT_TEMPLATE})
-        final_judgment = query_ollama(messages)
+        final_judgment = query_llm(messages)
         if final_judgment is None: continue
         messages.append({'role': 'assistant', 'content': final_judgment})
 
