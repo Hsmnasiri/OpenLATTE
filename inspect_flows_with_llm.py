@@ -94,19 +94,14 @@ def query_gemini(messages, retries=3):
     genai.configure(api_key=GEMINI_API_KEY)
     model = genai.GenerativeModel(GEMINI_MODEL)
     
-    # --- FIX: Reformat the message history to the structure Gemini API expects ---
     gemini_messages = []
     for msg in messages:
-        # Skip the system message, as it's not used in the same way by Gemini
         if msg['role'] == 'system':
             continue
         
-        # Translate role from 'assistant' (Ollama) to 'model' (Gemini)
         role = 'model' if msg['role'] == 'assistant' else 'user'
         
-        # Reformat the dictionary to the required {'role': ..., 'parts': [...]} structure
         gemini_messages.append({'role': role, 'parts': [msg['content']]})
-    # --- END FIX ---
 
     for attempt in range(retries):
         try:
@@ -116,14 +111,12 @@ def query_gemini(messages, retries=3):
                 'HARM_CATEGORY_SEXUALLY_EXPLICIT': 'BLOCK_NONE',
                 'HARM_CATEGORY_DANGEROUS_CONTENT': 'BLOCK_NONE',
             }
-            # Use the correctly formatted message history
             response = model.generate_content(gemini_messages, safety_settings=safety_settings)
             response_text = response.text.strip()
             
             print("--- Gemini Response ---")
             print(response_text + "\n")
 
-            # Add a delay to respect the API rate limit
             time.sleep(4.1)
             return response_text
 
