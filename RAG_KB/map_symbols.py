@@ -1,21 +1,14 @@
-# map_symbols.py
-# @author Gemini
-# @category Gemini.Analysis
-# @description Analyzes an unstripped binary to create a JSON map of function names to addresses.
+# Save function names and addresses for the current program
 
 import json
 
 def create_symbol_map():
-    """
-    Iterates through all functions in the program and saves their
-    names and entry point addresses to a JSON file.
-    """
+    """Write a JSON map from function name to entry address."""
     print("[+] Generating symbol map...")
     func_manager = currentProgram().getFunctionManager()
     symbol_map = {}
 
     for func in func_manager.getFunctions(True):
-        # We only care about functions with real, non-generic names
         if not func.getName().startswith("FUN_"):
             symbol_map[func.getName()] = str(func.getEntryPoint())
     
