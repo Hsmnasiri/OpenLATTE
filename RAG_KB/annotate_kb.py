@@ -1,17 +1,11 @@
 #!/usr/bin/env python3
-"""
-annotate_kb.py - GENERALIZED VERSION
-
-This script reads a decompiled_kb.json file, automatically identifies the
-vulnerable (_bad) and a representative patched (goodB2G) function,
-and uses an LLM to generate annotations for a structured knowledge base document.
-"""
+"""Generate a short annotation for decompiled code using an LLM."""
 import json
 import requests
 import argparse
 import os
 
-# --- Ollama Configuration ---
+# LLM configuration
 OLLAMA_API_URL = "http://localhost:11434/api/chat"
 OLLAMA_MODEL = "mistral"
 
@@ -22,7 +16,7 @@ def get_llm_annotation(prompt):
         response = requests.post(
             OLLAMA_API_URL,
             json={"model": OLLAMA_MODEL, "messages": [{"role": "user", "content": prompt}], "stream": False},
-            timeout=180 # 3 minute timeout
+            timeout=180
         )
         response.raise_for_status()
         return response.json()['message']['content'].strip().replace('"', "'") # Sanitize quotes
@@ -50,7 +44,6 @@ def main():
         print(f"[FATAL] Could not load input file '{args.input}': {e}")
         return
 
-    # --- Automatic Function Discovery ---
     print("[+] Automatically discovering vulnerable and patched functions...")
     bad_func_code = find_function(data, ["_bad", "::bad"])
     good_func_code = find_function(data, ["goodB2G"])
@@ -68,18 +61,15 @@ def main():
     patch_desc = get_llm_annotation(patch_prompt)
     print("  [OK] Got patch description.")
 
-    # --- NEW: Automatically construct output path if a directory is given ---
+    # build output file name when a directory is provided
     output_path = args.output
     if os.path.isdir(output_path):
         print(f"  [INFO] Output path '{output_path}' is a directory. Constructing filename from input.")
-        # Create a new filename based on the input file's name
         input_basename = os.path.basename(args.input)
         output_filename = input_basename.replace("decompiled_kb_", "annotated_kb_").replace(".json", ".txt")
-        # Join the directory and filename to create the full path
         output_path = os.path.join(output_path, output_filename)
-    # --- END NEW ---
 
-    # Assemble the final structured document
+    # assemble the final structured document
     structured_document = f"""CWE_ID: CWE-190
     Vulnerable_Function_Decompiled:
     {bad_func_code}
