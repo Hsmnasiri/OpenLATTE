@@ -1,0 +1,132 @@
+[
+  {
+    "name": "free",
+    "addr": "0x1",
+    "proto": "void free(void * __ptr)"
+  },
+  {
+    "name": "recv",
+    "addr": "0x2",
+    "proto": "ssize_t recv(int __fd, void * __buf, size_t __n, int __flags)"
+  },
+  {
+    "name": "__libc_start_main",
+    "addr": "0x3",
+    "proto": "undefined __libc_start_main()"
+  },
+  {
+    "name": "puts",
+    "addr": "0x4",
+    "proto": "int puts(char * __s)"
+  },
+  {
+    "name": "iswxdigit",
+    "addr": "0x5",
+    "proto": "int iswxdigit(wint_t __wc)"
+  },
+  {
+    "name": "strlen",
+    "addr": "0x6",
+    "proto": "size_t strlen(char * __s)"
+  },
+  {
+    "name": "__stack_chk_fail",
+    "addr": "0x7",
+    "proto": "undefined __stack_chk_fail()"
+  },
+  {
+    "name": "htons",
+    "addr": "0x8",
+    "proto": "uint16_t htons(uint16_t __hostshort)"
+  },
+  {
+    "name": "strchr",
+    "addr": "0x9",
+    "proto": "char * strchr(char * __s, int __c)"
+  },
+  {
+    "name": "printf",
+    "addr": "0xa",
+    "proto": "int printf(char * __format, ...)"
+  },
+  {
+    "name": "pthread_mutex_destroy",
+    "addr": "0xb",
+    "proto": "int pthread_mutex_destroy(pthread_mutex_t * __mutex)"
+  },
+  {
+    "name": "memset",
+    "addr": "0xc",
+    "proto": "void * memset(void * __s, int __c, size_t __n)"
+  },
+  {
+    "name": "close",
+    "addr": "0xd",
+    "proto": "int close(int __fd)"
+  },
+  {
+    "name": "srand",
+    "addr": "0xe",
+    "proto": "void srand(uint __seed)"
+  },
+  {
+    "name": "__isoc99_swscanf",
+    "addr": "0xf",
+    "proto": "undefined __isoc99_swscanf()"
+  },
+  {
+    "name": "inet_addr",
+    "addr": "0x10",
+    "proto": "in_addr_t inet_addr(char * __cp)"
+  },
+  {
+    "name": "time",
+    "addr": "0x11",
+    "proto": "time_t time(time_t * __timer)"
+  },
+  {
+    "name": "pthread_mutex_unlock",
+    "addr": "0x12",
+    "proto": "int pthread_mutex_unlock(pthread_mutex_t * __mutex)"
+  },
+  {
+    "name": "pthread_exit",
+    "addr": "0x13",
+    "proto": "void pthread_exit(void * __retval)"
+  },
+  {
+    "name": "malloc",
+    "addr": "0x14",
+    "proto": "void * malloc(size_t __size)"
+  },
+  {
+    "name": "wprintf",
+    "addr": "0x15",
+    "proto": "int wprintf(wchar_t * __format, ...)"
+  },
+  {
+    "name": "__isoc99_sscanf",
+    "addr": "0x16",
+    "proto": "undefined __isoc99_sscanf()"
+  },
+  {
+    "name": "pthread_create",
+    "addr": "0x17",
+    "proto": "int pthread_create(pthread_t * __newthread, pthread_attr_t * __attr, __start_routine * __start_routine, void * __arg)"
+  },
+  {
+    "name": "connect",
+    "addr": "0x18",
+    "proto": "int connect(int __fd, sockaddr * __addr, socklen_t __len)"
+  },
+  {
+    "name": "pthread_join",
+    "addr": "0x19",
+    "proto": "int pthread_join(pthread_t __th, void * * __thread_return)"
+  },
+  {
+    "name": "execl",
+    "addr": "0x1a",
+    "proto": "int execl(char * __path, char * __arg, ...)"
+  }
+]

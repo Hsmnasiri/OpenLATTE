@@ -7,7 +7,7 @@ WORKSPACE="/mnt/z/Papers/MyRAG/LATTE_ReImplementing/ghidra-workspace"
 SCRIPT_DIR="/mnt/z/Papers/MyRAG/LATTE_ReImplementing" # Directory where find_dangerous_flows.py is located
 
 # --- TARGET BINARY ---
-BINARY_PATH="/mnt/z/Papers/MyRAG/LATTE_ReImplementing/build/stripped/CWE190_Integer_Overflow__char_fscanf_preinc_05.out"
+BINARY_PATH="/mnt/z/Papers/MyRAG/LATTE_ReImplementing/build/build/stripped/CWE78_OS_Command_Injection__char_connect_socket_execl_05.out"
 #dbg binary
 #BINARY_PATH="/mnt/z/Papers/MyRAG/LATTE_ReImplementing/build/dbg/CWE190_Integer_Overflow__char_fscanf_preinc_05.unstripped"
 

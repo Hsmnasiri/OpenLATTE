@@ -18,3 +18,5 @@ __pycache__/
 
 *.gguf
 *.env
+*.out
+*.unstripped

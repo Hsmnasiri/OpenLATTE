@@ -1,0 +1,32 @@
+[
+  {
+    "sink_function": "strlen",
+    "sink_location": "0010159b",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_001014e9",
+        "call_location": "0010159b",
+        "callee_func": "strlen"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "recv",
+      "called_from_function": "FUN_001014e9"
+    }
+  },
+  {
+    "sink_function": "recv",
+    "sink_location": "0010165a",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_001014e9",
+        "call_location": "0010165a",
+        "callee_func": "recv"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "recv",
+      "called_from_function": "FUN_001014e9"
+    }
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "function": "recv",
+    "addr": "0x2",
+    "proto": "ssize_t recv(int __fd, void * __buf, size_t __n, int __flags)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        3
+      ],
+      "answer": "Yes, (recv; 3)"
+    }
+  },
+  {
+    "function": "puts",
+    "addr": "0x4",
+    "proto": "int puts(char * __s)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "Yes, (puts; 1)"
+    }
+  },
+  {
+    "function": "strlen",
+    "addr": "0x6",
+    "proto": "size_t strlen(char * __s)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "Yes, (strlen; 1)"
+    }
+  },
+  {
+    "function": "printf",
+    "addr": "0xa",
+    "proto": "int printf(char * __format, ...)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "Yes, (printf; 1)"
+    }
+  }, 
+  {
+    "function": "malloc",
+    "addr": "0x14",
+    "proto": "void * malloc(size_t __size)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "Yes (malloc; 1)"
+    }
+  },
+  {
+    "function": "wprintf",
+    "addr": "0x15",
+    "proto": "int wprintf(wchar_t * __format, ...)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "Yes\n(wprintf; 1)"
+    }
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "function": "recv",
+    "addr": "0x2",
+    "proto": "ssize_t recv(int __fd, void * __buf, size_t __n, int __flags)",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        2
+      ],
+      "answer": "Yes\n(recv; 2)"
+    }
+  },
+  {
+    "function": "__libc_start_main",
+    "addr": "0x3",
+    "proto": "undefined __libc_start_main()",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        3
+      ],
+      "answer": "Yes\n(__libc_start_main; 3)"
+    }
+  },
+  {
+    "function": "inet_addr",
+    "addr": "0x10",
+    "proto": "in_addr_t inet_addr(char * __cp)",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "Yes. (inet_addr; 1)"
+    }
+  },
+  {
+    "function": "__isoc99_sscanf",
+    "addr": "0x10",
+    "proto": "undefined __isoc99_sscanf()",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        2
+      ],
+      "answer": "yes; (__isoc99_sscanf; 2)"
+    }
+  }
+]
