@@ -1,8 +1,4 @@
-# find_dangerous_flows.py
-# @author Gemini & mnasi101
-# @category Gemini.Analysis
-# @description Implements the core dangerous flow discovery logic from the LATTE paper.
-
+# Implements the core dangerous flow discovery logic from the LATTE paper.
 import os
 import json
 from ghidra.app.decompiler import DecompInterface
@@ -10,13 +6,8 @@ from ghidra.util.task import ConsoleTaskMonitor
 from ghidra.program.model.pcode import PcodeOp
 from ghidra.app.decompiler.component import DecompilerUtils
 from ghidra.program.model.pcode import PcodeOp, HighParam, HighVariable
-# --- Constants --- #
 CALL_DEPTH_LIMIT = 50 
 def simple_backward_slice(varnode):
-    """
-    Returns list[PcodeOp] that define/propagate varnode
-    – بدون نیاز به DecompilerUtils (سازگار با 11.3.2).
-    """
     seen, work, ops = set(), [varnode], []
     while work:
         vn = work.pop()
@@ -27,11 +18,9 @@ def simple_backward_slice(varnode):
         def_op = vn.getDef()
         if def_op:
             ops.append(def_op)
-            # تمام ورودی‌های غیر ثابت را دنبال کن
             for inp in def_op.getInputs():
                 if not inp.isConstant():
                     work.append(inp)
-            # alias: اگر LOAD یا INDIRECT بود، آدرس را هم دنبال کن
             if def_op.getOpcode() in (PcodeOp.LOAD, PcodeOp.INDIRECT):
                 for inp in def_op.getInputs():
                     if inp != vn:
@@ -189,7 +178,6 @@ def generate_dangerous_flows(flow_traces, sources, func_manager, symbol_table, d
                 func = getFunctionAt(symbol_iter.next().getAddress())
             if not func: continue
 
-            # --- NEW ROBUST METHOD TO FIND CALLED FUNCTIONS ---
             # Instead of func.getCalledFunctions(), we iterate P-Code CALL ops.
             try:
                 high_func = decompiler.decompileFunction(func, 30, ConsoleTaskMonitor()).getHighFunction()
@@ -203,8 +191,10 @@ def generate_dangerous_flows(flow_traces, sources, func_manager, symbol_table, d
                         target_func = getFunctionAt(pcode_op.getInput(0).getAddress())
                         if target_func:
                             called_funcs_in_current.add(target_func.getName())
-
-                # This is the debug print you requested:
+                # Debug output to see which functions were called by the current function
+                if not called_funcs_in_current:
+                    print(f"  [WARN] No CALL ops found in function '{func_name}'.")
+                    continue
                 print("  [Debug] Functions called by '{}': {}".format(func_name, called_funcs_in_current))
 
                 # Check for an intersection with our known source functions

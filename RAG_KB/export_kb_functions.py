@@ -20,19 +20,14 @@ def export_kb_functions_generalized():
         print("[FATAL] Could not load symbol map at '{}': {}".format(map_path, e))
         return
 
-    # --- NEW, MORE ROBUST FUNCTION DISCOVERY ---
-    # Automatically find all relevant functions based on C and C++ Juliet naming conventions.
     functions_to_extract = []
-    # C-style keywords
+
     c_keywords = ["_bad", "goodG2B", "goodB2G"]
-    # C++-style keywords (must appear at the end of the name)
     cpp_keywords = ["::bad", "::good"]
 
     for func_name in symbol_map.keys():
-        # Check for C-style names
         if any(keyword in func_name for keyword in c_keywords):
             functions_to_extract.append(func_name)
-        # Check for C++-style names
         elif any(func_name.endswith(keyword) for keyword in cpp_keywords):
             functions_to_extract.append(func_name)
 

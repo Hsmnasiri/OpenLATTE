@@ -14,13 +14,11 @@ GHIDRA_ROOT="/mnt/z/Papers/RAG_Papers/ghidra_11.3.2_PUBLIC_20250415/ghidra_11.3.
 WORKSPACE="/mnt/z/Papers/MyRAG/LATTE_ReImplementing/ghidra-workspace"
 SCRIPT_DIR="/mnt/z/Papers/MyRAG/LATTE_ReImplementing"
 
-
-# Run headless to export external functions
 "$GHIDRA_ROOT/support/analyzeHeadless" \
   "$WORKSPACE" "${BASE}-Export" \
   -import "$BINARY" \
   -scriptPath "$SCRIPT_DIR" \
-  -postScript ExportExternalFuncs.py \
+  -postScript export_external_funcs.py \
   -deleteProject
 
 echo "Generated: $WORKSPACE/external_funcs_${BASE}.txt"

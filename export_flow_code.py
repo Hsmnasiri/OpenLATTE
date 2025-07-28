@@ -1,7 +1,4 @@
-# export_flow_code.py
-# @author Gemini
-# @category Gemini.Analysis
-# @description Extracts the decompiled C code for each function in a dangerous flow trace.
+# Extracts the decompiled C code for each function in a dangerous flow trace.
 
 import os
 import json
@@ -35,7 +32,6 @@ def export_code_for_flows():
         for step in flow['flow_trace']:
             func_name = step['caller_func']
             
-            # Find the function and decompile it
             func = None
             symbol_iter = symbol_table.getSymbols(func_name)
             if symbol_iter.hasNext():

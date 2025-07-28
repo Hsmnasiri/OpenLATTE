@@ -9,7 +9,7 @@ API_KEY = os.getenv("GOOGLE_API_KEY42", "YOUR_API_KEY")
 
 MySINK_PROMPT_TEMPLATE = """
 You are an expert security analyst specializing in C/C++ static taint analysis.
-Your task is to identify "taint sinks". A taint sink is a function where data from an untrusted source could lead to a vulnerability like memory corruption, command injection, or path traversal.
+Your task is to identify "taint sinks"(Such as causing instruction injection or buffer/heap overflows when it is called). A taint sink is a function where data from an untrusted source could lead to a vulnerability like memory corruption, command injection, or path traversal.
 
 Analyze the function: `{func_name}`
 
@@ -63,7 +63,7 @@ Now, classify this function:
 FUNCTION: {func_name}
 """
 SINK_PROMPT_TEMPLATE="""
-        As a program analyst, is it possible to use a call {func_name} as a sink when performing taint analysis? If so which parameters need to be checked for taint. 
+        As a program analyst, is it possible to use a call {func_name} as a sink (Such as causing instruction injection or buffer/heap overflows when it is called) when performing taint analysis? If so which parameters need to be checked for taint. 
         Please answer yes or no without additional explanation. If yes, please indicate the corresponding parameters. 
         For example, the system function can be used as a sink, and the first parameter needs to be checked as (system; 1).
         """
@@ -93,15 +93,13 @@ def classify_function(func_name: str, mode: str, retries: int = 3) -> dict:
     if mode not in ["source", "sink"]:
         raise ValueError("Mode must be either 'source' or 'sink'.")
 
-    template = SOURCE_PROMPT_TEMPLATE if mode == "source" else SINK_PROMPT_TEMPLATE
+    template = SOURCE_PROMPT_TEMPLATE if mode == "source" else MySINK_PROMPT_TEMPLATE
     prompt = template.format(func_name=func_name)
 
     response_data = {"is_true": False, "params": [], "answer": "API call failed after all retries."}
 
-    # --- Gemini API Call with Retry Logic ---
     for attempt in range(retries):
         try:
-            # Set safety settings to be less restrictive for this security context
             safety_settings = {
                 'HARM_CATEGORY_HARASSMENT': 'BLOCK_NONE',
                 'HARM_CATEGORY_HATE_SPEECH': 'BLOCK_NONE',
@@ -111,17 +109,15 @@ def classify_function(func_name: str, mode: str, retries: int = 3) -> dict:
             response = model.generate_content(prompt)
             llm_output = response.text.strip()
             
-            # --- Parsing Logic ---
+            # Parsing Logic - maybe it is weak! and needs to be improved
             params = []
             is_true = False
-            # Search for the specific pattern like (func; 1,2)
             for line in reversed(llm_output.splitlines()):
-                # A more robust regex to handle potential variations in spacing
                 match = re.search(r"\(\s*([^;]+)\s*;\s*([\d,]+)\s*\)", line, re.IGNORECASE)
                 if match and match.group(1).strip().lower() == func_name.lower():
                     params = [int(p.strip()) for p in match.group(2).split(",")]
                     is_true = True
-                    break # Found a valid classification
+                    break  
                 elif re.search(r"\(\s*NO\s*\)", line, re.IGNORECASE):
                     is_true = False
                     break
@@ -131,19 +127,16 @@ def classify_function(func_name: str, mode: str, retries: int = 3) -> dict:
                 "params": params,
                 "answer": llm_output
             }
-            break # Exit the retry loop on success
+            break 
 
         except Exception as e:
             print(f"[WARN] API call for '{func_name}' failed on attempt {attempt + 1}/{retries}: {e}")
             response_data = {"is_true": False, "params": [], "answer": f"API Error after {attempt + 1} attempts: {e}"}
-            # Respect the API's request to wait, especially for rate limit errors
             if "retry_delay" in str(e):
-                time.sleep(30) # Wait longer for explicit rate limit errors
+                time.sleep(30) 
             elif attempt < retries - 1:
-                time.sleep(5 * (attempt + 1)) # Exponential backoff for other errors
+                time.sleep(5 * (attempt + 1)) 
 
-    # --- FIX: Add a delay to respect the API rate limit (15 requests/minute) ---
-    # A 4.1-second delay ensures we stay under the limit (60s / 15 = 4s per request).
     time.sleep(4.1)
 
     return response_data

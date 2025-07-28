@@ -72,7 +72,6 @@ def classify_function(func_name: str, mode: str) -> dict:
     template = SOURCE_PROMPT_TEMPLATE if mode == "source" else SINK_PROMPT_TEMPLATE
     prompt = template.format(func_name=func_name)
 
-    # Call the Ollama API to classify the function
     try:
         response = requests.post(
             OLLAMA_API_URL,
@@ -85,10 +84,8 @@ def classify_function(func_name: str, mode: str) -> dict:
         print(f"[WARN] LLM API call failed for '{func_name}': {e}")
         return {"is_true": False, "params": [], "answer": f"Error: {e}"}
 
-    # Parse the LLM output to extract parameters and classification status
     params = []
     is_true = False
-    # Search for the specific pattern like (func; 1,2)
     for line in reversed(llm_output.splitlines()):
         match = re.search(r"\(([^;]+);\s*([\d,]+)\)", line)
         if match and match.group(1).strip().lower() == func_name.lower():

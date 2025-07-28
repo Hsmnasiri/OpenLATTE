@@ -1,16 +1,9 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Batch-classify functions as taint sources or sinks via a local LLM.
-This script combines and replaces the previous sink/source batch scripts.
-"""
-
 import argparse
 import json
 import os
 import sys
 
-# Import the refactored classification logic
+# switch to the appropriate classification function based on the mode
 from classifyLocal import classify_function as classify_functionLocal   
 from classifyGemini import classify_function as classify_functionGemini
 
@@ -37,10 +30,8 @@ def main():
                         help="Directory to save the output JSON file.")
     args = parser.parse_args()
 
-    # Load functions from the input file
     external_funcs = load_external_funcs(args.ext_funcs)
 
-    # Determine a descriptive output filename
     base_name = os.path.basename(args.ext_funcs) \
                   .replace("external_funcs_", "") \
                   .replace(".out.txt", "")
@@ -50,7 +41,6 @@ def main():
     results = []
     print(f"[*] Starting classification for {len(external_funcs)} functions in '{args.mode}' mode...")
 
-    # Process each function
     for i, func_info in enumerate(external_funcs, 1):
         func_name = func_info.get("name")
         if not func_name:
@@ -70,7 +60,6 @@ def main():
             })
             print(f"    [OK] Classified '{func_name}' as a {args.mode}. Result: {response['params']}")
 
-    # Save the collected results to the output file
     with open(output_file, "w", encoding="utf-8") as fp:
         json.dump(results, fp, indent=2, ensure_ascii=False)
 
