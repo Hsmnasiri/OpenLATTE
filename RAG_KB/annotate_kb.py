@@ -1,7 +1,5 @@
-#!/usr/bin/env python3
+ 
 """
-annotate_kb.py - GENERALIZED AND UPGRADED VERSION
-
 This script reads a decompiled_kb.json file, automatically identifies the
 vulnerable (_bad) and patched (goodB2G) functions, and uses an LLM
 (Ollama or Gemini) to generate high-quality, structured annotations for a
@@ -16,18 +14,14 @@ import re
 import google.generativeai as genai
 from dotenv import load_dotenv
 
-# Load environment variables from .env file for the API key
 load_dotenv()
 
-# --- LLM Configuration ---
 OLLAMA_API_URL = "http://localhost:11434/api/chat"
 OLLAMA_MODEL = "mistral"
 
-# Gemini API Key can be set in your .env file
-GEMINI_API_KEY = os.getenv("GOOGLE_API_KEY", "YOUR_API_KEY")
+GEMINI_API_KEY = os.getenv("GOOGLE_API_KEY", "GOOGLE_API_KEY42")
 GEMINI_MODEL = 'gemini-1.5-pro'
 
-# --- NEW: Robust, Academic-Style Prompts ---
 
 ROOT_CAUSE_PROMPT_TEMPLATE = """
 You are an expert security analyst specializing in identifying vulnerabilities in decompiled C/C++ code.
@@ -125,7 +119,6 @@ def main():
         print(f"[FATAL] Could not load input file '{args.input}': {e}")
         return
 
-    # --- GENERALIZED: Automatically detect CWE from filename ---
     cwe_id = "CWE-Unknown"
     match = re.search(r'CWE_(\d+)', args.input)
     if match:
