@@ -1,103 +1,139 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Generate three separate prompt files (semantics, root cause, fix) from flow-cards JSONL.
-No model calls here; just prompt construction with clear metadata for stable batching.
+Generate stepwise LLM prompts from RAG-ready flow-cards (JSONL).
+- Input: kb_flowcards_*.jsonl (produced by postprocess_kb_chains.py)
+- Output: prompts_semantics.txt, prompts_rootcause.txt, prompts_fix.txt
+- Design goals:
+  * No seed names (good*/bad) in prompts (we use steps[].display which is anonymized address labels).
+  * Minimal metadata exposure; keep prompts focused on chain behavior and snippets.
+  * Stable, batch-friendly format with clear item delimiters.
 """
 
-import argparse, json, os, pathlib
+import argparse
+import json
+import os
+import pathlib
+from typing import List, Dict, Any
 
-SEMANTICS_TMPL = """You are a security analyst. Summarize the function-level semantics of the following flow.
-Focus on what each step does (inputs, transformations, outputs). Avoid CWE labels or vulnerability claims.
-Return a single concise paragraph (<=120 words).
+ITEM_HDR = "# item {n}"
 
-META:
-- kb_id: {kb_id}
-- sample: {sample}
-- cwe_family_hint: {cwe}
-
-FLOW SUMMARY:
-{summary}
-
-STEPS (ordered):
-{steps}
+SEMANTICS_INSTR = """## TASK
+You are given an anonymized call chain (address-labeled) with small decompiled snippets around callsites.
+Describe concisely what the chain does, focusing on data flow and observable side effects (I/O, arithmetic, branching).
+Keep it objective, do not invent missing details, and do not infer function names.
+Return 3–5 sentences, no markdown, no code.
 """
 
-ROOTCAUSE_TMPL = """You are a security analyst. Explain the likely ROOT CAUSE of the vulnerability pattern for this flow.
-Use the CWE family hint if relevant, but base reasoning ONLY on the snippets and API usage.
-Return 2-5 sentences, crisp, referencing concrete operations (e.g., increment without bounds).
-
-META:
-- kb_id: {kb_id}
-- sample: {sample}
-- cwe_family_hint: {cwe}
-
-FLOW SUMMARY:
-{summary}
-
-STEPS (ordered):
-{steps}
+ROOTCAUSE_INSTR = """## TASK
+Analyze the same anonymized chain for potential vulnerability root cause(s), if any.
+Discuss the risky operations (e.g., unchecked arithmetic, unsafe input use, format or command construction), and conditions under which exploitation is feasible.
+If you see no realistic risk, say so briefly and explain why.
+Return 3–6 sentences, no markdown, no code.
 """
 
-FIX_TMPL = """You are a security analyst. Describe the PATCHED BEHAVIOR that would mitigate this flow's risk.
-Be specific (what guard or transformation must be added, where). Avoid generic advice.
-Return 2-5 sentences. If a guard on limits is appropriate, name the exact bound (e.g., CHAR_MAX, INT_MAX).
-
-META:
-- kb_id: {kb_id}
-- sample: {sample}
-- cwe_family_hint: {cwe}
-
-FLOW SUMMARY:
-{summary}
-
-STEPS (ordered):
-{steps}
+FIX_INSTR = """## TASK
+Suggest a minimal and concrete mitigation to make the chain safe if it were vulnerable.
+Describe the guard/condition/check or alternative API choice and where in the chain it should be applied.
+If the chain already appears safe, state the specific reason it is safe and what invariant or check enforces it.
+Return 2–4 sentences, no markdown, no code.
 """
 
-def steps_to_text(steps):
-    chunks = []
-    for s in steps:
-        header = f"- Step {s['step']}: {s['name']} @ {s['address']}"
-        body = s.get("snippet","").strip()
-        if body:
-            chunk = header + "\n" + body
+def load_jsonl(path: str) -> List[Dict[str, Any]]:
+    items = []
+    with open(path, "r") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            items.append(json.loads(line))
+    return items
+
+def chain_display(fc: Dict[str, Any]) -> str:
+    # Prefer the step-level anonymized labels prepared by postprocess_kb_chains.py
+    steps = fc.get("steps", [])
+    if steps:
+        disp = [s.get("display", "") for s in steps if s.get("display")]
+        if disp:
+            return " → ".join(disp)
+    # Fallback: compact summary_string if steps missing (should rarely happen)
+    return fc.get("summary_string", "N/A")
+
+def steps_block(fc: Dict[str, Any]) -> str:
+    out = []
+    for s in fc.get("steps", []):
+        disp = s.get("display", "")
+        snip = s.get("snippet", "") or ""
+        if not disp:
+            continue
+        # Only include steps with any snippet to keep prompts short
+        if snip.strip():
+            out.append(f"- Step {s.get('step')}: {disp}\n```c\n{snip}\n```")
         else:
-            chunk = header
-        chunks.append(chunk)
-    return "\n\n".join(chunks)
+            out.append(f"- Step {s.get('step')}: {disp}")
+    return "\n".join(out).strip()
+
+def one_prompt(fc: Dict[str, Any], instr: str) -> str:
+    kb_id = fc.get("kb_id", "kb:unknown")
+    flow = chain_display(fc)
+    steps_txt = steps_block(fc)
+    # Strictly avoid seed/sample/cwe names in the prompt. We do not include sample_name/cwe_family/variant.
+    body = [
+        "## META",
+        f"- kb_id: {kb_id}",
+        "- anonymized: true",
+        "",
+        "## FLOW",
+        flow,
+        "",
+        "## STEPS",
+        steps_txt if steps_txt else "(no snippets available)"
+    ]
+    return "\n".join([instr.strip(), ""] + body).strip()
+
+def write_prompts(flows: List[Dict[str, Any]], out_path: str, kind: str) -> None:
+    """
+    kind ∈ {semantics, rootcause, fix}
+    """
+    if kind == "semantics":
+        instr = SEMANTICS_INSTR
+    elif kind == "rootcause":
+        instr = ROOTCAUSE_INSTR
+    elif kind == "fix":
+        instr = FIX_INSTR
+    else:
+        raise ValueError("unknown prompt kind")
+
+    lines = []
+    for i, fc in enumerate(flows, 1):
+        lines.append(ITEM_HDR.format(n=i))
+        lines.append(one_prompt(fc, instr))
+        lines.append("")  # separator blank line
+    text = "\n".join(lines).rstrip() + "\n"
+
+    pathlib.Path(os.path.dirname(out_path)).mkdir(parents=True, exist_ok=True)
+    with open(out_path, "w") as f:
+        f.write(text)
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--flowcards", required=True)
-    ap.add_argument("--out_dir", required=True)
+    ap.add_argument("--flowcards", required=True, help="Path to kb_flowcards_*.jsonl")
+    ap.add_argument("--out_dir", required=True, help="Directory to write prompt files")
     args = ap.parse_args()
 
-    semantics, rootcause, fix = [], [], []
-    with open(args.flowcards, "r") as f:
-        for line in f:
-            line = line.strip()
-            if not line: continue
-            d = json.loads(line)
-            kb_id = d["kb_id"]
-            sample = d.get("sample_name", d.get("program","sample"))
-            cwe = d.get("cwe_family","")
-            summary = d.get("summary_string","")
-            steps_text = steps_to_text(d.get("steps", []))
+    flows = load_jsonl(args.flowcards)
 
-            semantics.append(SEMANTICS_TMPL.format(kb_id=kb_id, sample=sample, cwe=cwe, summary=summary, steps=steps_text))
-            rootcause.append(ROOTCAUSE_TMPL.format(kb_id=kb_id, sample=sample, cwe=cwe, summary=summary, steps=steps_text))
-            fix.append(FIX_TMPL.format(kb_id=kb_id, sample=sample, cwe=cwe, summary=summary, steps=steps_text))
+    out_sem = os.path.join(args.out_dir, "prompts_semantics.txt")
+    out_rc  = os.path.join(args.out_dir, "prompts_rootcause.txt")
+    out_fix = os.path.join(args.out_dir, "prompts_fix.txt")
 
-    pathlib.Path(args.out_dir).mkdir(parents=True, exist_ok=True)
-    with open(os.path.join(args.out_dir, "prompts_semantics.txt"), "w") as f:
-        f.write("\n\n".join(f"# item {i+1}\n{p}" for i,p in enumerate(semantics)))
-    with open(os.path.join(args.out_dir, "prompts_rootcause.txt"), "w") as f:
-        f.write("\n\n".join(f"# item {i+1}\n{p}" for i,p in enumerate(rootcause)))
-    with open(os.path.join(args.out_dir, "prompts_fix.txt"), "w") as f:
-        f.write("\n\n".join(f"# item {i+1}\n{p}" for i,p in enumerate(fix)))
+    write_prompts(flows, out_sem, "semantics")
+    write_prompts(flows, out_rc,  "rootcause")
+    write_prompts(flows, out_fix, "fix")
 
-    print(f"[DONE] prompts → {args.out_dir}/prompts_*.txt (semantics/rootcause/fix)")
+    print(f"[DONE] prompts → {out_sem}")
+    print(f"[DONE] prompts → {out_rc}")
+    print(f"[DONE] prompts → {out_fix}")
 
 if __name__ == "__main__":
     main()
