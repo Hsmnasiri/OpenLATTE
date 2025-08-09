@@ -12,7 +12,19 @@ Post-process kb_callchains_*.json into compact, RAG-ready "flow-cards":
 import argparse, json, os, re, pathlib
 from typing import List, Dict, Any
 
-# ---- Simple lists; extend as you go across CWEs ----
+LABEL_MODE = os.environ.get("LABEL_MODE", "addr")  # addr | both | seeded
+SEED_PAT = re.compile(r'\b(good(?:B2G1|B2G2|G2B1|G2B2)?|good|.*_bad)\b')
+
+def display_label(name: str, addr: str) -> str:
+    if LABEL_MODE == "addr":
+        return f"SUB_{addr}"
+    if LABEL_MODE == "both":
+        return f"{name}@{addr}"
+    return name  # "seeded" (not recommended for unbiased prompts)
+def redact_seed_names(text: str) -> str:
+    if not text:
+        return text
+    return SEED_PAT.sub("FUNC", text)
 SOURCES = {
     # integer-like sources
     "fscanf", "__isoc99_fscanf", "scanf", "gets", "getline", "read", "recv", "rand",
@@ -52,22 +64,15 @@ def window_around_keyword(code: str, kw: str, radius: int = 5) -> str:
     if not code:
         return ""
     lines = code.splitlines()
-
-    # Try strict "name(" anchor
     anchors = []
     if kw:
         anchors = [i for i, ln in enumerate(lines) if f"{kw}(" in ln]
-
-    # Fallback: loose name
     if not anchors and kw:
         anchors = [i for i, ln in enumerate(lines) if kw in ln]
-
-    # Final fallback: start of function (skip big headers)
     if not anchors:
         start = 0
         end = min(len(lines), radius * 2 + 1)
         return "\n".join(lines[start:end]).strip()
-
     i = anchors[0]
     start = max(0, i - radius)
     end = min(len(lines), i + radius + 1)
@@ -76,24 +81,36 @@ def window_around_keyword(code: str, kw: str, radius: int = 5) -> str:
 def build_steps(chain):
     steps = []
     for idx, node in enumerate(chain):
-        name = node.get("name", "")
-        addr = node.get("address", "")
+        name = node.get("name","")
+        addr = node.get("address","")
         is_ext = bool(node.get("external", False))
-        code = node.get("code", "") if not is_ext else ""
-        # next callee to anchor the window
+        code = node.get("code","") if not is_ext else ""
         next_name = ""
         if idx + 1 < len(chain):
-            next_name = norm_ext(chain[idx + 1].get("name", ""))
+            next_name = norm_ext(chain[idx + 1].get("name",""))
         snippet = window_around_keyword(code, next_name) if code else ""
+        snippet = redact_seed_names(snippet)  # <--- anti-bias
         steps.append({
             "step": idx + 1,
             "name": name,
+            "display": display_label(name, addr),  # <--- for prompts
             "address": addr,
             "external": is_ext,
             "anchor": next_name if next_name else name,
             "snippet": snippet
         })
     return steps
+
+def build_flow_edges(call_chain):
+    edges = []
+    for i in range(len(call_chain) - 1):
+        a = call_chain[i]; b = call_chain[i+1]
+        edges.append({
+            "from": display_label(a.get("name",""), a.get("address","")),
+            "to":   display_label(b.get("name",""), b.get("address","")),
+            "to_external": bool(b.get("external", False))
+        })
+    return edges
 
 def flow_summary(chain: List[Dict[str, Any]]) -> str:
     names = [norm_ext(n.get("name","")) for n in chain]
