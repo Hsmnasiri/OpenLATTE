@@ -28,7 +28,22 @@ def is_start_name(name):
     return any(k in name or name.endswith(k) for k in START_KEYS)
 
 def collect_starts_from_symbol_map(symmap):
-    return [(n, addr) for n, addr in symmap.items() if is_start_name(n)]
+    # Preferred schema: {"starts":[{"name":..., "address":...}, ...]}
+    starts = []
+    for s in symmap.get("starts", []):
+        name = (s.get("name") or "").strip()
+        addr = (s.get("address") or "").strip()
+        if name and addr:
+            starts.append((name, addr))
+
+    # Fallback: older flat schema: { "<name>": "<addr>", ... }
+    if not starts:
+        for n, v in symmap.items():
+            if isinstance(v, str) and n and v:
+                if is_start_name(n):
+                    starts.append((n, v))
+
+    return starts
 
 def decompile(decomp, func):
     r = decomp.decompileFunction(func, 60, ConsoleTaskMonitor())
@@ -96,6 +111,8 @@ def run():
     log(f"Program (stripped): {base}")
 
     symmap = load_symbol_map(base)
+    log(f"Symbol map path: {os.path.join(OUT_BASE, 'build', f'symbol_map_{base}.json')}")
+    log(f"Program in map: {symmap.get('program')}, starts={len(symmap.get('starts', []))}")
     starts_meta = collect_starts_from_symbol_map(symmap)
     log(f"Starts from symbol_map: {len(starts_meta)} found")
 

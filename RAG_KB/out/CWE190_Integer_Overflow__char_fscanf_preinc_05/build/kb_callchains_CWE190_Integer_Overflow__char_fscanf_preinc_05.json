@@ -1,0 +1,435 @@
+{
+  "program": "CWE190_Integer_Overflow__char_fscanf_preinc_05",
+  "max_depth": 6,
+  "paths": [
+    {
+      "variant": "bad",
+      "call_chain": [
+        {
+          "name": "CWE190_Integer_Overflow__char_fscanf_preinc_05_bad",
+          "address": "001013c9",
+          "external": false,
+          "code": "\nvoid FUN_001013c9(void)\n\n{\n  long in_FS_OFFSET;\n  char local_12;\n  char local_11;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  local_12 = ' ';\n  if (DAT_00104010 != 0) {\n    __isoc99_fscanf(stdin,&DAT_00102008,&local_12);\n  }\n  if (DAT_00104010 != 0) {\n    local_12 = local_12 + '\\x01';\n    local_11 = local_12;\n    FUN_0010186b((int)local_12);\n  }\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
+        },
+        {
+          "name": "__isoc99_fscanf",
+          "address": "001011a0",
+          "external": true,
+          "code": "",
+          "edge": {
+            "from": "FUN_001013c9",
+            "to": "__isoc99_fscanf",
+            "site": "0010140f"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "bad",
+      "call_chain": [
+        {
+          "name": "CWE190_Integer_Overflow__char_fscanf_preinc_05_bad",
+          "address": "001013c9",
+          "external": false,
+          "code": "\nvoid FUN_001013c9(void)\n\n{\n  long in_FS_OFFSET;\n  char local_12;\n  char local_11;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  local_12 = ' ';\n  if (DAT_00104010 != 0) {\n    __isoc99_fscanf(stdin,&DAT_00102008,&local_12);\n  }\n  if (DAT_00104010 != 0) {\n    local_12 = local_12 + '\\x01';\n    local_11 = local_12;\n    FUN_0010186b((int)local_12);\n  }\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
+        },
+        {
+          "name": "FUN_0010186b",
+          "address": "0010186b",
+          "external": false,
+          "code": "\nvoid FUN_0010186b(char param_1)\n\n{\n  printf(\"%02x\\n\",(ulong)(uint)(int)param_1);\n  return;\n}\n\n",
+          "edge": {
+            "from": "FUN_001013c9",
+            "to": "FUN_0010186b",
+            "site": "00101435"
+          }
+        },
+        {
+          "name": "printf",
+          "address": "001011e0",
+          "external": true,
+          "code": "",
+          "edge": {
+            "from": "FUN_0010186b",
+            "to": "printf",
+            "site": "00101891"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "bad",
+      "call_chain": [
+        {
+          "name": "CWE190_Integer_Overflow__char_fscanf_preinc_05_bad",
+          "address": "001013c9",
+          "external": false,
+          "code": "\nvoid FUN_001013c9(void)\n\n{\n  long in_FS_OFFSET;\n  char local_12;\n  char local_11;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  local_12 = ' ';\n  if (DAT_00104010 != 0) {\n    __isoc99_fscanf(stdin,&DAT_00102008,&local_12);\n  }\n  if (DAT_00104010 != 0) {\n    local_12 = local_12 + '\\x01';\n    local_11 = local_12;\n    FUN_0010186b((int)local_12);\n  }\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
+        },
+        {
+          "name": "__stack_chk_fail",
+          "address": "001011d0",
+          "external": true,
+          "code": "",
+          "edge": {
+            "from": "FUN_001013c9",
+            "to": "__stack_chk_fail",
+            "site": "0010144a"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "good",
+      "call_chain": [
+        {
+          "name": "goodB2G1",
+          "address": "00101451",
+          "external": false,
+          "code": "\nvoid FUN_00101451(void)\n\n{\n  long in_FS_OFFSET;\n  char local_12;\n  char local_11;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  local_12 = ' ';\n  if (DAT_00104010 != 0) {\n    __isoc99_fscanf(stdin,&DAT_00102008,&local_12);\n  }\n  if (DAT_0010402c == 0) {\n    if (local_12 == '\\x7f') {\n      FUN_001016f1(\"data value is too large to perform arithmetic safely.\");\n    }\n    else {\n      local_12 = local_12 + '\\x01';\n      local_11 = local_12;\n      FUN_0010186b((int)local_12);\n    }\n  }\n  else {\n    FUN_001016f1(\"Benign, fixed string\");\n  }\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
+        },
+        {
+          "name": "__isoc99_fscanf",
+          "address": "001011a0",
+          "external": true,
+          "code": "",
+          "edge": {
+            "from": "FUN_00101451",
+            "to": "__isoc99_fscanf",
+            "site": "00101497"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "good",
+      "call_chain": [
+        {
+          "name": "goodB2G1",
+          "address": "00101451",
+          "external": false,
+          "code": "\nvoid FUN_00101451(void)\n\n{\n  long in_FS_OFFSET;\n  char local_12;\n  char local_11;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  local_12 = ' ';\n  if (DAT_00104010 != 0) {\n    __isoc99_fscanf(stdin,&DAT_00102008,&local_12);\n  }\n  if (DAT_0010402c == 0) {\n    if (local_12 == '\\x7f') {\n      FUN_001016f1(\"data value is too large to perform arithmetic safely.\");\n    }\n    else {\n      local_12 = local_12 + '\\x01';\n      local_11 = local_12;\n      FUN_0010186b((int)local_12);\n    }\n  }\n  else {\n    FUN_001016f1(\"Benign, fixed string\");\n  }\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
+        },
+        {
+          "name": "FUN_001016f1",
+          "address": "001016f1",
+          "external": false,
+          "code": "\nvoid FUN_001016f1(char *param_1)\n\n{\n  if (param_1 != (char *)0x0) {\n    puts(param_1);\n  }\n  return;\n}\n\n",
+          "edge": {
+            "from": "FUN_00101451",
+            "to": "FUN_001016f1",
+            "site": "001014b0"
+          }
+        },
+        {
+          "name": "puts",
+          "address": "001011b0",
+          "external": true,
+          "code": "",
+          "edge": {
+            "from": "FUN_001016f1",
+            "to": "puts",
+            "site": "0010170f"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "good",
+      "call_chain": [
+        {
+          "name": "goodB2G1",
+          "address": "00101451",
+          "external": false,
+          "code": "\nvoid FUN_00101451(void)\n\n{\n  long in_FS_OFFSET;\n  char local_12;\n  char local_11;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  local_12 = ' ';\n  if (DAT_00104010 != 0) {\n    __isoc99_fscanf(stdin,&DAT_00102008,&local_12);\n  }\n  if (DAT_0010402c == 0) {\n    if (local_12 == '\\x7f') {\n      FUN_001016f1(\"data value is too large to perform arithmetic safely.\");\n    }\n    else {\n      local_12 = local_12 + '\\x01';\n      local_11 = local_12;\n      FUN_0010186b((int)local_12);\n    }\n  }\n  else {\n    FUN_001016f1(\"Benign, fixed string\");\n  }\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
+        },
+        {
+          "name": "FUN_0010186b",
+          "address": "0010186b",
+          "external": false,
+          "code": "\nvoid FUN_0010186b(char param_1)\n\n{\n  printf(\"%02x\\n\",(ulong)(uint)(int)param_1);\n  return;\n}\n\n",
+          "edge": {
+            "from": "FUN_00101451",
+            "to": "FUN_0010186b",
+            "site": "001014d6"
+          }
+        },
+        {
+          "name": "printf",
+          "address": "001011e0",
+          "external": true,
+          "code": "",
+          "edge": {
+            "from": "FUN_0010186b",
+            "to": "printf",
+            "site": "00101891"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "good",
+      "call_chain": [
+        {
+          "name": "goodB2G1",
+          "address": "00101451",
+          "external": false,
+          "code": "\nvoid FUN_00101451(void)\n\n{\n  long in_FS_OFFSET;\n  char local_12;\n  char local_11;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  local_12 = ' ';\n  if (DAT_00104010 != 0) {\n    __isoc99_fscanf(stdin,&DAT_00102008,&local_12);\n  }\n  if (DAT_0010402c == 0) {\n    if (local_12 == '\\x7f') {\n      FUN_001016f1(\"data value is too large to perform arithmetic safely.\");\n    }\n    else {\n      local_12 = local_12 + '\\x01';\n      local_11 = local_12;\n      FUN_0010186b((int)local_12);\n    }\n  }\n  else {\n    FUN_001016f1(\"Benign, fixed string\");\n  }\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
+        },
+        {
+          "name": "FUN_001016f1",
+          "address": "001016f1",
+          "external": false,
+          "code": "\nvoid FUN_001016f1(char *param_1)\n\n{\n  if (param_1 != (char *)0x0) {\n    puts(param_1);\n  }\n  return;\n}\n\n",
+          "edge": {
+            "from": "FUN_00101451",
+            "to": "FUN_001016f1",
+            "site": "001014e7"
+          }
+        },
+        {
+          "name": "puts",
+          "address": "001011b0",
+          "external": true,
+          "code": "",
+          "edge": {
+            "from": "FUN_001016f1",
+            "to": "puts",
+            "site": "0010170f"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "good",
+      "call_chain": [
+        {
+          "name": "goodB2G1",
+          "address": "00101451",
+          "external": false,
+          "code": "\nvoid FUN_00101451(void)\n\n{\n  long in_FS_OFFSET;\n  char local_12;\n  char local_11;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  local_12 = ' ';\n  if (DAT_00104010 != 0) {\n    __isoc99_fscanf(stdin,&DAT_00102008,&local_12);\n  }\n  if (DAT_0010402c == 0) {\n    if (local_12 == '\\x7f') {\n      FUN_001016f1(\"data value is too large to perform arithmetic safely.\");\n    }\n    else {\n      local_12 = local_12 + '\\x01';\n      local_11 = local_12;\n      FUN_0010186b((int)local_12);\n    }\n  }\n  else {\n    FUN_001016f1(\"Benign, fixed string\");\n  }\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
+        },
+        {
+          "name": "__stack_chk_fail",
+          "address": "001011d0",
+          "external": true,
+          "code": "",
+          "edge": {
+            "from": "FUN_00101451",
+            "to": "__stack_chk_fail",
+            "site": "001014fc"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "good",
+      "call_chain": [
+        {
+          "name": "goodB2G2",
+          "address": "00101503",
+          "external": false,
+          "code": "\nvoid FUN_00101503(void)\n\n{\n  long in_FS_OFFSET;\n  char local_12;\n  char local_11;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  local_12 = ' ';\n  if (DAT_00104010 != 0) {\n    __isoc99_fscanf(stdin,&DAT_00102008,&local_12);\n  }\n  if (DAT_00104010 != 0) {\n    if (local_12 == '\\x7f') {\n      FUN_001016f1(\"data value is too large to perform arithmetic safely.\");\n    }\n    else {\n      local_12 = local_12 + '\\x01';\n      local_11 = local_12;\n      FUN_0010186b((int)local_12);\n    }\n  }\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
+        },
+        {
+          "name": "__isoc99_fscanf",
+          "address": "001011a0",
+          "external": true,
+          "code": "",
+          "edge": {
+            "from": "FUN_00101503",
+            "to": "__isoc99_fscanf",
+            "site": "00101549"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "good",
+      "call_chain": [
+        {
+          "name": "goodB2G2",
+          "address": "00101503",
+          "external": false,
+          "code": "\nvoid FUN_00101503(void)\n\n{\n  long in_FS_OFFSET;\n  char local_12;\n  char local_11;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  local_12 = ' ';\n  if (DAT_00104010 != 0) {\n    __isoc99_fscanf(stdin,&DAT_00102008,&local_12);\n  }\n  if (DAT_00104010 != 0) {\n    if (local_12 == '\\x7f') {\n      FUN_001016f1(\"data value is too large to perform arithmetic safely.\");\n    }\n    else {\n      local_12 = local_12 + '\\x01';\n      local_11 = local_12;\n      FUN_0010186b((int)local_12);\n    }\n  }\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
+        },
+        {
+          "name": "FUN_0010186b",
+          "address": "0010186b",
+          "external": false,
+          "code": "\nvoid FUN_0010186b(char param_1)\n\n{\n  printf(\"%02x\\n\",(ulong)(uint)(int)param_1);\n  return;\n}\n\n",
+          "edge": {
+            "from": "FUN_00101503",
+            "to": "FUN_0010186b",
+            "site": "00101577"
+          }
+        },
+        {
+          "name": "printf",
+          "address": "001011e0",
+          "external": true,
+          "code": "",
+          "edge": {
+            "from": "FUN_0010186b",
+            "to": "printf",
+            "site": "00101891"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "good",
+      "call_chain": [
+        {
+          "name": "goodB2G2",
+          "address": "00101503",
+          "external": false,
+          "code": "\nvoid FUN_00101503(void)\n\n{\n  long in_FS_OFFSET;\n  char local_12;\n  char local_11;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  local_12 = ' ';\n  if (DAT_00104010 != 0) {\n    __isoc99_fscanf(stdin,&DAT_00102008,&local_12);\n  }\n  if (DAT_00104010 != 0) {\n    if (local_12 == '\\x7f') {\n      FUN_001016f1(\"data value is too large to perform arithmetic safely.\");\n    }\n    else {\n      local_12 = local_12 + '\\x01';\n      local_11 = local_12;\n      FUN_0010186b((int)local_12);\n    }\n  }\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
+        },
+        {
+          "name": "FUN_001016f1",
+          "address": "001016f1",
+          "external": false,
+          "code": "\nvoid FUN_001016f1(char *param_1)\n\n{\n  if (param_1 != (char *)0x0) {\n    puts(param_1);\n  }\n  return;\n}\n\n",
+          "edge": {
+            "from": "FUN_00101503",
+            "to": "FUN_001016f1",
+            "site": "00101588"
+          }
+        },
+        {
+          "name": "puts",
+          "address": "001011b0",
+          "external": true,
+          "code": "",
+          "edge": {
+            "from": "FUN_001016f1",
+            "to": "puts",
+            "site": "0010170f"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "good",
+      "call_chain": [
+        {
+          "name": "goodB2G2",
+          "address": "00101503",
+          "external": false,
+          "code": "\nvoid FUN_00101503(void)\n\n{\n  long in_FS_OFFSET;\n  char local_12;\n  char local_11;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  local_12 = ' ';\n  if (DAT_00104010 != 0) {\n    __isoc99_fscanf(stdin,&DAT_00102008,&local_12);\n  }\n  if (DAT_00104010 != 0) {\n    if (local_12 == '\\x7f') {\n      FUN_001016f1(\"data value is too large to perform arithmetic safely.\");\n    }\n    else {\n      local_12 = local_12 + '\\x01';\n      local_11 = local_12;\n      FUN_0010186b((int)local_12);\n    }\n  }\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
+        },
+        {
+          "name": "__stack_chk_fail",
+          "address": "001011d0",
+          "external": true,
+          "code": "",
+          "edge": {
+            "from": "FUN_00101503",
+            "to": "__stack_chk_fail",
+            "site": "0010159d"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "good",
+      "call_chain": [
+        {
+          "name": "goodG2B1",
+          "address": "001015a4",
+          "external": false,
+          "code": "\nvoid FUN_001015a4(void)\n\n{\n  char local_a;\n  \n  local_a = ' ';\n  if (DAT_0010402c == 0) {\n    local_a = '\\x02';\n  }\n  else {\n    FUN_001016f1(\"Benign, fixed string\");\n  }\n  if (DAT_00104010 != 0) {\n    FUN_0010186b(local_a + '\\x01');\n  }\n  return;\n}\n\n"
+        },
+        {
+          "name": "FUN_001016f1",
+          "address": "001016f1",
+          "external": false,
+          "code": "\nvoid FUN_001016f1(char *param_1)\n\n{\n  if (param_1 != (char *)0x0) {\n    puts(param_1);\n  }\n  return;\n}\n\n",
+          "edge": {
+            "from": "FUN_001015a4",
+            "to": "FUN_001016f1",
+            "site": "001015c8"
+          }
+        },
+        {
+          "name": "puts",
+          "address": "001011b0",
+          "external": true,
+          "code": "",
+          "edge": {
+            "from": "FUN_001016f1",
+            "to": "puts",
+            "site": "0010170f"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "good",
+      "call_chain": [
+        {
+          "name": "goodG2B1",
+          "address": "001015a4",
+          "external": false,
+          "code": "\nvoid FUN_001015a4(void)\n\n{\n  char local_a;\n  \n  local_a = ' ';\n  if (DAT_0010402c == 0) {\n    local_a = '\\x02';\n  }\n  else {\n    FUN_001016f1(\"Benign, fixed string\");\n  }\n  if (DAT_00104010 != 0) {\n    FUN_0010186b(local_a + '\\x01');\n  }\n  return;\n}\n\n"
+        },
+        {
+          "name": "FUN_0010186b",
+          "address": "0010186b",
+          "external": false,
+          "code": "\nvoid FUN_0010186b(char param_1)\n\n{\n  printf(\"%02x\\n\",(ulong)(uint)(int)param_1);\n  return;\n}\n\n",
+          "edge": {
+            "from": "FUN_001015a4",
+            "to": "FUN_0010186b",
+            "site": "001015f4"
+          }
+        },
+        {
+          "name": "printf",
+          "address": "001011e0",
+          "external": true,
+          "code": "",
+          "edge": {
+            "from": "FUN_0010186b",
+            "to": "printf",
+            "site": "00101891"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "good",
+      "call_chain": [
+        {
+          "name": "goodG2B2",
+          "address": "001015fc",
+          "external": false,
+          "code": "\nvoid FUN_001015fc(void)\n\n{\n  if (DAT_00104010 != 0) {\n    FUN_0010186b(3);\n  }\n  return;\n}\n\n"
+        },
+        {
+          "name": "FUN_0010186b",
+          "address": "0010186b",
+          "external": false,
+          "code": "\nvoid FUN_0010186b(char param_1)\n\n{\n  printf(\"%02x\\n\",(ulong)(uint)(int)param_1);\n  return;\n}\n\n",
+          "edge": {
+            "from": "FUN_001015fc",
+            "to": "FUN_0010186b",
+            "site": "0010163b"
+          }
+        },
+        {
+          "name": "printf",
+          "address": "001011e0",
+          "external": true,
+          "code": "",
+          "edge": {
+            "from": "FUN_0010186b",
+            "to": "printf",
+            "site": "00101891"
+          }
+        }
+      ]
+    }
+  ]
+}

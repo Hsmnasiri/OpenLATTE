@@ -1,0 +1,303 @@
+# item 1
+You are a security analyst. Explain the likely ROOT CAUSE of the vulnerability pattern for this flow.
+Use the CWE family hint if relevant, but base reasoning ONLY on the snippets and API usage.
+Return 2-5 sentences, crisp, referencing concrete operations (e.g., increment without bounds).
+
+META:
+- kb_id: CWE190_Integer_Overflow__char_fscanf_preinc_05::printf::1
+- sample: CWE190_Integer_Overflow__char_fscanf_preinc_05
+- cwe_family_hint: 
+
+FLOW SUMMARY:
+FLOW: CWE190_Integer_Overflow__char_fscanf_preinc_05_bad -> FUN_0010186b -> printf
+
+STEPS (ordered):
+- Step 1: CWE190_Integer_Overflow__char_fscanf_preinc_05_bad @ 001013c9
+if (DAT_00104010 != 0) {
+    local_12 = local_12 + '\x01';
+    local_11 = local_12;
+    FUN_0010186b((int)local_12);
+  }
+  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {
+                    /* WARNING: Subroutine does not return */
+
+- Step 2: FUN_0010186b @ 0010186b
+void FUN_0010186b(char param_1)
+
+{
+  printf("%02x\n",(ulong)(uint)(int)param_1);
+  return;
+}
+
+- Step 3: printf @ 001011e0
+
+
+# item 2
+You are a security analyst. Explain the likely ROOT CAUSE of the vulnerability pattern for this flow.
+Use the CWE family hint if relevant, but base reasoning ONLY on the snippets and API usage.
+Return 2-5 sentences, crisp, referencing concrete operations (e.g., increment without bounds).
+
+META:
+- kb_id: CWE190_Integer_Overflow__char_fscanf_preinc_05::puts::2
+- sample: CWE190_Integer_Overflow__char_fscanf_preinc_05
+- cwe_family_hint: 
+
+FLOW SUMMARY:
+FLOW: goodB2G1 -> FUN_001016f1 -> puts
+
+STEPS (ordered):
+- Step 1: goodB2G1 @ 00101451
+}
+  if (DAT_0010402c == 0) {
+    if (local_12 == '\x7f') {
+      FUN_001016f1("data value is too large to perform arithmetic safely.");
+    }
+    else {
+      local_12 = local_12 + '\x01';
+
+- Step 2: FUN_001016f1 @ 001016f1
+{
+  if (param_1 != (char *)0x0) {
+    puts(param_1);
+  }
+  return;
+}
+
+- Step 3: puts @ 001011b0
+
+
+# item 3
+You are a security analyst. Explain the likely ROOT CAUSE of the vulnerability pattern for this flow.
+Use the CWE family hint if relevant, but base reasoning ONLY on the snippets and API usage.
+Return 2-5 sentences, crisp, referencing concrete operations (e.g., increment without bounds).
+
+META:
+- kb_id: CWE190_Integer_Overflow__char_fscanf_preinc_05::printf::3
+- sample: CWE190_Integer_Overflow__char_fscanf_preinc_05
+- cwe_family_hint: 
+
+FLOW SUMMARY:
+FLOW: goodB2G1 -> FUN_0010186b -> printf
+
+STEPS (ordered):
+- Step 1: goodB2G1 @ 00101451
+else {
+      local_12 = local_12 + '\x01';
+      local_11 = local_12;
+      FUN_0010186b((int)local_12);
+    }
+  }
+  else {
+
+- Step 2: FUN_0010186b @ 0010186b
+void FUN_0010186b(char param_1)
+
+{
+  printf("%02x\n",(ulong)(uint)(int)param_1);
+  return;
+}
+
+- Step 3: printf @ 001011e0
+
+
+# item 4
+You are a security analyst. Explain the likely ROOT CAUSE of the vulnerability pattern for this flow.
+Use the CWE family hint if relevant, but base reasoning ONLY on the snippets and API usage.
+Return 2-5 sentences, crisp, referencing concrete operations (e.g., increment without bounds).
+
+META:
+- kb_id: CWE190_Integer_Overflow__char_fscanf_preinc_05::puts::4
+- sample: CWE190_Integer_Overflow__char_fscanf_preinc_05
+- cwe_family_hint: 
+
+FLOW SUMMARY:
+FLOW: goodB2G1 -> FUN_001016f1 -> puts
+
+STEPS (ordered):
+- Step 1: goodB2G1 @ 00101451
+}
+  if (DAT_0010402c == 0) {
+    if (local_12 == '\x7f') {
+      FUN_001016f1("data value is too large to perform arithmetic safely.");
+    }
+    else {
+      local_12 = local_12 + '\x01';
+
+- Step 2: FUN_001016f1 @ 001016f1
+{
+  if (param_1 != (char *)0x0) {
+    puts(param_1);
+  }
+  return;
+}
+
+- Step 3: puts @ 001011b0
+
+
+# item 5
+You are a security analyst. Explain the likely ROOT CAUSE of the vulnerability pattern for this flow.
+Use the CWE family hint if relevant, but base reasoning ONLY on the snippets and API usage.
+Return 2-5 sentences, crisp, referencing concrete operations (e.g., increment without bounds).
+
+META:
+- kb_id: CWE190_Integer_Overflow__char_fscanf_preinc_05::printf::5
+- sample: CWE190_Integer_Overflow__char_fscanf_preinc_05
+- cwe_family_hint: 
+
+FLOW SUMMARY:
+FLOW: goodB2G2 -> FUN_0010186b -> printf
+
+STEPS (ordered):
+- Step 1: goodB2G2 @ 00101503
+else {
+      local_12 = local_12 + '\x01';
+      local_11 = local_12;
+      FUN_0010186b((int)local_12);
+    }
+  }
+  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {
+
+- Step 2: FUN_0010186b @ 0010186b
+void FUN_0010186b(char param_1)
+
+{
+  printf("%02x\n",(ulong)(uint)(int)param_1);
+  return;
+}
+
+- Step 3: printf @ 001011e0
+
+
+# item 6
+You are a security analyst. Explain the likely ROOT CAUSE of the vulnerability pattern for this flow.
+Use the CWE family hint if relevant, but base reasoning ONLY on the snippets and API usage.
+Return 2-5 sentences, crisp, referencing concrete operations (e.g., increment without bounds).
+
+META:
+- kb_id: CWE190_Integer_Overflow__char_fscanf_preinc_05::puts::6
+- sample: CWE190_Integer_Overflow__char_fscanf_preinc_05
+- cwe_family_hint: 
+
+FLOW SUMMARY:
+FLOW: goodB2G2 -> FUN_001016f1 -> puts
+
+STEPS (ordered):
+- Step 1: goodB2G2 @ 00101503
+}
+  if (DAT_00104010 != 0) {
+    if (local_12 == '\x7f') {
+      FUN_001016f1("data value is too large to perform arithmetic safely.");
+    }
+    else {
+      local_12 = local_12 + '\x01';
+
+- Step 2: FUN_001016f1 @ 001016f1
+{
+  if (param_1 != (char *)0x0) {
+    puts(param_1);
+  }
+  return;
+}
+
+- Step 3: puts @ 001011b0
+
+
+# item 7
+You are a security analyst. Explain the likely ROOT CAUSE of the vulnerability pattern for this flow.
+Use the CWE family hint if relevant, but base reasoning ONLY on the snippets and API usage.
+Return 2-5 sentences, crisp, referencing concrete operations (e.g., increment without bounds).
+
+META:
+- kb_id: CWE190_Integer_Overflow__char_fscanf_preinc_05::puts::7
+- sample: CWE190_Integer_Overflow__char_fscanf_preinc_05
+- cwe_family_hint: 
+
+FLOW SUMMARY:
+FLOW: goodG2B1 -> FUN_001016f1 -> puts
+
+STEPS (ordered):
+- Step 1: goodG2B1 @ 001015a4
+local_a = '\x02';
+  }
+  else {
+    FUN_001016f1("Benign, fixed string");
+  }
+  if (DAT_00104010 != 0) {
+    FUN_0010186b(local_a + '\x01');
+
+- Step 2: FUN_001016f1 @ 001016f1
+{
+  if (param_1 != (char *)0x0) {
+    puts(param_1);
+  }
+  return;
+}
+
+- Step 3: puts @ 001011b0
+
+
+# item 8
+You are a security analyst. Explain the likely ROOT CAUSE of the vulnerability pattern for this flow.
+Use the CWE family hint if relevant, but base reasoning ONLY on the snippets and API usage.
+Return 2-5 sentences, crisp, referencing concrete operations (e.g., increment without bounds).
+
+META:
+- kb_id: CWE190_Integer_Overflow__char_fscanf_preinc_05::printf::8
+- sample: CWE190_Integer_Overflow__char_fscanf_preinc_05
+- cwe_family_hint: 
+
+FLOW SUMMARY:
+FLOW: goodG2B1 -> FUN_0010186b -> printf
+
+STEPS (ordered):
+- Step 1: goodG2B1 @ 001015a4
+FUN_001016f1("Benign, fixed string");
+  }
+  if (DAT_00104010 != 0) {
+    FUN_0010186b(local_a + '\x01');
+  }
+  return;
+}
+
+- Step 2: FUN_0010186b @ 0010186b
+void FUN_0010186b(char param_1)
+
+{
+  printf("%02x\n",(ulong)(uint)(int)param_1);
+  return;
+}
+
+- Step 3: printf @ 001011e0
+
+
+# item 9
+You are a security analyst. Explain the likely ROOT CAUSE of the vulnerability pattern for this flow.
+Use the CWE family hint if relevant, but base reasoning ONLY on the snippets and API usage.
+Return 2-5 sentences, crisp, referencing concrete operations (e.g., increment without bounds).
+
+META:
+- kb_id: CWE190_Integer_Overflow__char_fscanf_preinc_05::printf::9
+- sample: CWE190_Integer_Overflow__char_fscanf_preinc_05
+- cwe_family_hint: 
+
+FLOW SUMMARY:
+FLOW: goodG2B2 -> FUN_0010186b -> printf
+
+STEPS (ordered):
+- Step 1: goodG2B2 @ 001015fc
+{
+  if (DAT_00104010 != 0) {
+    FUN_0010186b(3);
+  }
+  return;
+}
+
+- Step 2: FUN_0010186b @ 0010186b
+void FUN_0010186b(char param_1)
+
+{
+  printf("%02x\n",(ulong)(uint)(int)param_1);
+  return;
+}
+
+- Step 3: printf @ 001011e0
