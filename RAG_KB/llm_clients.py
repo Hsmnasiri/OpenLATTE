@@ -1,4 +1,3 @@
-# llm_clients.py
 import os, time, json
 from typing import Dict, Any, Optional
 
@@ -10,11 +9,10 @@ class LLMClient:
             import google.generativeai as genai  # pip install google-generativeai
             self.genai = genai
             self.model = os.environ.get("GEMINI_MODEL", "gemini-2.5-pro")
-            self.key = os.environ.get("GEMINI_API_KEY","AIzaSyBGXYDkLg0UEVrB7eT00txfw8bdV9353-g")
+            self.key = os.environ.get("GEMINI_API_KEY","AIzaSyBZzBl9xuA6OlYy1-ZEiLeZCx9TQtEQ9S8")
             self.genai.configure(api_key=self.key)
 
         elif self.backend == "local":
-            # Simple local HTTP JSON API: POST /generate  {"model":"...", "prompt":"..."}
             import requests  # pip install requests
             self.requests = requests
             self.model = os.environ.get("LOCAL_MODEL", "local-llm")
