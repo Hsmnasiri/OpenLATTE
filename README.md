@@ -64,43 +64,11 @@ Several scripts expect environment variables such as `GOOGLE_API_KEY` or `GOOGLE
 
 ## Retrieval‑augmented mode
 
-The `rag.py` script extends the final inspection phase with optional RAG support.  Pass a text file containing knowledge‑base context via `--rag`:
-
-```bash
-python3 rag.py \
-    --flows-with-code results/flows_with_code_<binary>.json \
-    --sources results/source_classification_<binary>.json \
-    --output results/vulnerability_reports_rag.json \
-    --rag build/annotated_kb.txt
-```
-
-Relevant code illustrating the RAG logic can be found around lines 100‑170 of `rag.py`:
-
-```python
-parser.add_argument('--rag', help="Path to a knowledge base file to enable RAG mode.")
-...
-if args.rag:
-    with open(args.rag, 'r') as f:
-        rag_context = f.read()
-    print(f"[INFO] RAG mode enabled. Loaded knowledge base from: {args.rag}")
-...
-if rag_context:
-    end_prompt = RAG_END_PROMPT_TEMPLATE.format(rag_context=rag_context)
-else:
-    end_prompt = END_PROMPT_TEMPLATE
-```
-
+This step has not been implemented yet, and we are working on the Knowledge base creation. After that, we will embed data and implement the retrieval mechanism, and integrate it into the inspect_flows_with_llm.py step.
 
 ## Knowledge base generation
 
-For RAG, decompiled functions can be exported and annotated using:
-
-```bash
-./run_export_kb_function.sh <testcase_basename>
-python3 annotate_kb.py --input build/decompiled_kb_<testcase>.json --output build/annotated_kb.txt
-```
-
-This produces a structured knowledge‑base document describing the vulnerability and its patch.
+in folder RAG_KB, we have implemented some scripts that create a KB based on some samples in the Juliet test suite to find a decompiled pair of good and bad code flows for every sample with llm annotations for semantic, root cause, and patched description, similar Vul-RAG paper but apply their work on a binary level. 
 
 ## Notes
 
