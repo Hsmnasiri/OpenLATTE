@@ -1,6 +1,8 @@
 import os, time, json
 from typing import Dict, Any, Optional
+from dotenv import load_dotenv
 
+load_dotenv()
 class LLMClient:
     def __init__(self, backend: str):
         self.backend = backend.lower()
@@ -8,8 +10,8 @@ class LLMClient:
         if self.backend == "gemini":
             import google.generativeai as genai  # pip install google-generativeai
             self.genai = genai
-            self.model = os.environ.get("GEMINI_MODEL", "gemini-2.5-pro")
-            self.key = os.environ.get("GEMINI_API_KEY","AIzaSyCtUndbm-skW01gBLngPqV6DgdlYKf0q3k")
+            self.model = os.environ.get("GOOGLE_API_MODEL", "gemini-2.5-pro")
+            self.key = os.environ.get("GOOGLE_API_KEY42","gemini-2.5-pro")
             self.genai.configure(api_key=self.key)
 
         elif self.backend == "local":

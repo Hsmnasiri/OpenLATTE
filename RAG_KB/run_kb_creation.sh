@@ -31,6 +31,7 @@ $PYTHON "${SCRIPT_DIR}/generate_paired_prompts.py" \
 # Step 3: Run the annotation and create the final knowledge base
 echo "[3/3] Annotating pairs and creating the knowledge base..."
 $PYTHON "${SCRIPT_DIR}/annotate_pairs.py" \
+  --paired-flows "${PAIRED_FLOWS_OUT}" \
   --prompts-dir "${PROMPTS_DIR_OUT}" \
   --output "${KB_FINAL_OUT}" \
   --backend "${BACKEND}"

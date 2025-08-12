@@ -3,42 +3,24 @@ import argparse
 import os
 import pathlib
 import re
-from llm_clients import LLMClient # Assuming your llm_clients.py is in the same directory
+from llm_clients import LLMClient 
 
 def extract_json_from_response(text):
-    """
-    Extracts a JSON object from a string, even if it's wrapped in markdown code blocks.
-    """
-    # Find the start of the JSON object
-    json_start_match = re.search(r'\{', text)
-    if not json_start_match:
+    match = re.search(r'\{.*\}', text, re.DOTALL)
+    if not match:
+        return None
+    try:
+        return json.loads(match.group(0))
+    except json.JSONDecodeError:
         return None
 
-    # Find the end of the JSON object by matching braces
-    json_start_index = json_start_match.start()
-    open_braces = 0
-    for i, char in enumerate(text[json_start_index:]):
-        if char == '{':
-            open_braces += 1
-        elif char == '}':
-            open_braces -= 1
-            if open_braces == 0:
-                json_end_index = json_start_index + i + 1
-                json_str = text[json_start_index:json_end_index]
-                try:
-                    return json.loads(json_str)
-                except json.JSONDecodeError:
-                    return None
-    return None
-
-
-def annotate_and_create_kb(prompts_dir, output_path, backend):
-    """
-    Reads all prompt files from a directory, gets annotations from the LLM,
-    and creates the final knowledge base.
-    """
+def annotate_and_create_kb(prompts_dir, paired_flows_path, output_path, backend):
     client = LLMClient(backend)
     knowledge_base = []
+    with open(paired_flows_path, 'r') as f:
+        paired_flows_data = json.load(f)
+    
+    flows_map = {pair['vulnerability_base_name']: pair for pair in paired_flows_data}
 
     prompt_files = [f for f in os.listdir(prompts_dir) if f.endswith('.txt')]
 
@@ -47,20 +29,28 @@ def annotate_and_create_kb(prompts_dir, output_path, backend):
         with open(os.path.join(prompts_dir, filename), 'r') as f:
             prompt = f.read()
 
-        # Extract vulnerability base name from filename
-        # e.g., prompt_CWE190_Integer_Overflow__char_fscanf_preinc_05_0.txt -> CWE190...
         base_name = "_".join(filename.replace("prompt_", "").split("_")[:-1])
 
         try:
             response = client.generate(prompt)
-            # Use the robust extraction function to get the JSON
             annotation = extract_json_from_response(response['text'])
             
-            if annotation:
-                annotation['vulnerability'] = base_name
-                knowledge_base.append(annotation)
+            if annotation and base_name in flows_map:
+                
+                kb_entry = {
+                    "vulnerability": base_name,
+                    "functional_semantics": annotation.get("functional_semantics"),
+                    "vulnerability_cause": annotation.get("vulnerability_cause"),
+                    "fixing_solution": annotation.get("fixing_solution"),
+                    "bad_code": flows_map[base_name]['bad_flow'][0].get("code"),
+                    "good_code": flows_map[base_name]['good_flow'][0].get("code")
+                }
+                knowledge_base.append(kb_entry)
             else:
-                raise json.JSONDecodeError("Could not extract valid JSON from LLM response.", response['text'], 0)
+                if not annotation:
+                    raise json.JSONDecodeError("Could not extract valid JSON from LLM response.", response['text'], 0)
+                if base_name not in flows_map:
+                    print(f"  [!] Warning: Could not find matching flow data for {base_name}")
 
         except (json.JSONDecodeError, KeyError) as e:
             print(f"  [!] Failed to parse LLM response for {filename}: {e}")
@@ -68,9 +58,8 @@ def annotate_and_create_kb(prompts_dir, output_path, backend):
                  print(f"      Response was: {response.get('text', 'N/A')}")
             continue
 
-    # Write the final knowledge base to a JSONL file
     pathlib.Path(os.path.dirname(output_path)).mkdir(parents=True, exist_ok=True)
-    with open(output_path, 'w') as f:
+    with open(output_path, 'w')     as f:
         for entry in knowledge_base:
             f.write(json.dumps(entry) + '\n')
 
@@ -78,8 +67,9 @@ def annotate_and_create_kb(prompts_dir, output_path, backend):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Annotate paired prompts and create the knowledge base.")
-    parser.add_argument('--prompts-dir', required=True, help="Directory containing the prompt files.")
-    parser.add_argument('--output', required=True, help="Path to save the final knowledge base JSONL file.")
-    parser.add_argument('--backend', default="gemini", choices=["gemini", "local"], help="LLM backend to use.")
+    parser.add_argument('--prompts-dir', required=True)
+    parser.add_argument('--paired-flows', required=True, help="Path to the kb_paired_flows JSON file.")
+    parser.add_argument('--output', required=True)
+    parser.add_argument('--backend', default="gemini", choices=["gemini", "local"])
     args = parser.parse_args()
-    annotate_and_create_kb(args.prompts_dir, args.output, args.backend)
+    annotate_and_create_kb(args.prompts_dir, args.paired_flows, args.output, args.backend)
