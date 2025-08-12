@@ -81,6 +81,9 @@ if [[ ! -f "${KB_CALLCHAINS_JSON}" ]]; then
   exit 1
 fi
 
+
+
+
 # ======= [3/4] Post-process → flow-cards =====================================
 echo "[3/4] Post-process chains → compact flow-cards (RAG-ready)"
 "${PYTHON}" "${SCRIPT_DIR}/postprocess_kb_chains.py" \

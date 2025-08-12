@@ -9,7 +9,7 @@ class LLMClient:
             import google.generativeai as genai  # pip install google-generativeai
             self.genai = genai
             self.model = os.environ.get("GEMINI_MODEL", "gemini-2.5-pro")
-            self.key = os.environ.get("GEMINI_API_KEY","AIzaSyBZzBl9xuA6OlYy1-ZEiLeZCx9TQtEQ9S8")
+            self.key = os.environ.get("GEMINI_API_KEY","AIzaSyCtUndbm-skW01gBLngPqV6DgdlYKf0q3k")
             self.genai.configure(api_key=self.key)
 
         elif self.backend == "local":
