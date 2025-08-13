@@ -11,10 +11,11 @@ BACKEND="${BACKEND:-gemini}"
 # --- SCRIPT START ---
 echo "### Starting Batch Knowledge Base Creation ###"
 
-# Create a temporary directory for all paired prompts
+# Create temporary directories
 ALL_PROMPTS_DIR="${RAG_KB_DIR}/all_prompts"
-rm -rf "${ALL_PROMPTS_DIR}"
-mkdir -p "${ALL_PROMPTS_DIR}"
+ALL_PAIRED_FLOWS_DIR="${RAG_KB_DIR}/all_paired_flows"
+rm -rf "${ALL_PROMPTS_DIR}" "${ALL_PAIRED_FLOWS_DIR}"
+mkdir -p "${ALL_PROMPTS_DIR}" "${ALL_PAIRED_FLOWS_DIR}"
 
 # Step 1 & 2: Loop through all Ghidra outputs to pair flows and generate prompts
 find "${OUTPUT_DIR}" -type f -name "kb_callchains_*.json" | while read -r CALLCHAINS_FILE; do
@@ -34,21 +35,32 @@ find "${OUTPUT_DIR}" -type f -name "kb_callchains_*.json" | while read -r CALLCH
       --input "${PAIRED_FLOWS_OUT}" \
       --output-dir "${PROMPTS_DIR_OUT}"
 
-    # Copy generated prompts to the central directory
+    # Copy generated prompts and paired_flows to central directories
     find "${PROMPTS_DIR_OUT}" -name "*.txt" -type f -exec cp {} "${ALL_PROMPTS_DIR}/" \;
+    if [ -f "${PAIRED_FLOWS_OUT}" ]; then
+        cp "${PAIRED_FLOWS_OUT}" "${ALL_PAIRED_FLOWS_DIR}/"
+    fi
 done
 
-# Step 3: Annotate all prompts at once and create the final consolidated KB
+# --- Step 3: Consolidate all paired_flows.json files ---
+echo -e "\n--- Consolidating all paired flow files ---"
+CONSOLIDATED_PAIRED_FLOWS="${RAG_KB_DIR}/consolidated_paired_flows.json"
+# Use jq to merge all JSON arrays into a single array
+jq -s 'add' ${ALL_PAIRED_FLOWS_DIR}/*.json > "${CONSOLIDATED_PAIRED_FLOWS}"
+echo "   Consolidated file created at: ${CONSOLIDATED_PAIRED_FLOWS}"
+
+
+# --- Step 4: Annotate all prompts at once ---
 echo -e "\n--- Annotating all generated prompts ---"
 KB_FINAL_OUT="${RAG_KB_DIR}/final_knowledge_base.jsonl"
 $PYTHON "${RAG_KB_DIR}/annotate_pairs.py" \
-  --paired-flows "${PAIRED_FLOWS_OUT}" \
   --prompts-dir "${ALL_PROMPTS_DIR}" \
+  --paired-flows "${CONSOLIDATED_PAIRED_FLOWS}" \
   --output "${KB_FINAL_OUT}" \
   --backend "${BACKEND}"
 
-# Clean up temporary prompt directory
-rm -rf "${ALL_PROMPTS_DIR}"
+# Clean up temporary directories
+rm -rf "${ALL_PROMPTS_DIR}" "${ALL_PAIRED_FLOWS_DIR}" "${CONSOLIDATED_PAIRED_FLOWS}"
 
 echo -e "\n\n✅ Batch Knowledge Base creation complete!"
 echo "   Final consolidated KB is located at: ${KB_FINAL_OUT}"
