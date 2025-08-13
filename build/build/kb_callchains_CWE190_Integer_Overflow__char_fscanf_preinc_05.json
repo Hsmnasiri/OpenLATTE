@@ -1,5 +1,0 @@
-{
-  "program": "CWE190_Integer_Overflow__char_fscanf_preinc_05",
-  "max_depth": 10,
-  "paths": []
-}
