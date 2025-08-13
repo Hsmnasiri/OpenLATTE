@@ -34,7 +34,7 @@ find "${JULIET_BINARIES_DIR}" -type f -name "*.out" | while read -r STRIPPED_BIN
 
     # Clean up previous runs for this binary
     rm -rf "${WORKSPACE_DIR}"
-    mkdir -p "${BUILD_DIR}"
+    mkdir -p "${BUILD_DIR}" "${WORKSPACE_DIR}"
 
     # Step 1: Generate Symbol Map from the unstripped binary
     echo "[1/2] Generating symbol map for ${BASE_NAME}..."

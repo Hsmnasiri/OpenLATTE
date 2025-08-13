@@ -35,13 +35,14 @@ find "${OUTPUT_DIR}" -type f -name "kb_callchains_*.json" | while read -r CALLCH
       --output-dir "${PROMPTS_DIR_OUT}"
 
     # Copy generated prompts to the central directory
-    cp "${PROMPTS_DIR_OUT}"/*.txt "${ALL_PROMPTS_DIR}/"
+    find "${PROMPTS_DIR_OUT}" -name "*.txt" -type f -exec cp {} "${ALL_PROMPTS_DIR}/" \;
 done
 
 # Step 3: Annotate all prompts at once and create the final consolidated KB
 echo -e "\n--- Annotating all generated prompts ---"
 KB_FINAL_OUT="${RAG_KB_DIR}/final_knowledge_base.jsonl"
 $PYTHON "${RAG_KB_DIR}/annotate_pairs.py" \
+  --paired-flows "${PAIRED_FLOWS_OUT}" \
   --prompts-dir "${ALL_PROMPTS_DIR}" \
   --output "${KB_FINAL_OUT}" \
   --backend "${BACKEND}"

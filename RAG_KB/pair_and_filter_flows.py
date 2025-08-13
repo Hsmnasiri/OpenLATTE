@@ -56,14 +56,13 @@ def pair_and_filter_by_vulnerability(input_path, output_path):
 
         # 3. Find a corresponding 'good' flow with the same sink
         found_good_flow = None
+        # Search through all available good chains for a matching sink
         for good_chain in good_chains:
-            # Prioritize goodB2G variants as they are the direct patch
-            if "goodB2G" in good_chain[0].get("name"):
-                _, good_sink = is_meaningful_sink(good_chain)
-                if good_sink == sink:
-                    found_good_flow = good_chain
-                    break # Found the matching good flow
-
+            _, good_sink = is_meaningful_sink(good_chain)
+            if good_sink == sink:
+                found_good_flow = good_chain
+                break  # Found the first matching good flow, so we stop
+            
         if found_good_flow:
             print(f"  - Creating vulnerability pair for: {vulnerability_base_name}")
             print(f"    - Matched on sink: {sink}")

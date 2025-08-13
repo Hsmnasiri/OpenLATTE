@@ -1,0 +1,645 @@
+{
+  "program": "CWE78_OS_Command_Injection__char_connect_socket_execl_06",
+  "image_base": "00100000",
+  "starts": [
+    {
+      "name": "CWE78_OS_Command_Injection__char_connect_socket_execl_06_bad",
+      "address": "001014e9"
+    },
+    {
+      "name": "goodG2B1",
+      "address": "00101768"
+    },
+    {
+      "name": "goodG2B2",
+      "address": "00101875"
+    }
+  ],
+  "symbols": [
+    {
+      "name": "_init",
+      "address": "00101000",
+      "type": "Function"
+    },
+    {
+      "name": "FUN_00101020",
+      "address": "00101020",
+      "type": "Function"
+    },
+    {
+      "name": "FUN_00101210",
+      "address": "00101210",
+      "type": "Function"
+    },
+    {
+      "name": "free",
+      "address": "00101220",
+      "type": "Function"
+    },
+    {
+      "name": "recv",
+      "address": "00101230",
+      "type": "Function"
+    },
+    {
+      "name": "puts",
+      "address": "00101240",
+      "type": "Function"
+    },
+    {
+      "name": "iswxdigit",
+      "address": "00101250",
+      "type": "Function"
+    },
+    {
+      "name": "strlen",
+      "address": "00101260",
+      "type": "Function"
+    },
+    {
+      "name": "__stack_chk_fail",
+      "address": "00101270",
+      "type": "Function"
+    },
+    {
+      "name": "htons",
+      "address": "00101280",
+      "type": "Function"
+    },
+    {
+      "name": "strchr",
+      "address": "00101290",
+      "type": "Function"
+    },
+    {
+      "name": "printf",
+      "address": "001012a0",
+      "type": "Function"
+    },
+    {
+      "name": "pthread_mutex_destroy",
+      "address": "001012b0",
+      "type": "Function"
+    },
+    {
+      "name": "memset",
+      "address": "001012c0",
+      "type": "Function"
+    },
+    {
+      "name": "close",
+      "address": "001012d0",
+      "type": "Function"
+    },
+    {
+      "name": "srand",
+      "address": "001012e0",
+      "type": "Function"
+    },
+    {
+      "name": "__isoc99_swscanf",
+      "address": "001012f0",
+      "type": "Function"
+    },
+    {
+      "name": "inet_addr",
+      "address": "00101300",
+      "type": "Function"
+    },
+    {
+      "name": "time",
+      "address": "00101310",
+      "type": "Function"
+    },
+    {
+      "name": "pthread_mutex_unlock",
+      "address": "00101320",
+      "type": "Function"
+    },
+    {
+      "name": "pthread_exit",
+      "address": "00101330",
+      "type": "Function"
+    },
+    {
+      "name": "malloc",
+      "address": "00101340",
+      "type": "Function"
+    },
+    {
+      "name": "wprintf",
+      "address": "00101350",
+      "type": "Function"
+    },
+    {
+      "name": "__isoc99_sscanf",
+      "address": "00101360",
+      "type": "Function"
+    },
+    {
+      "name": "pthread_create",
+      "address": "00101370",
+      "type": "Function"
+    },
+    {
+      "name": "connect",
+      "address": "00101380",
+      "type": "Function"
+    },
+    {
+      "name": "pthread_join",
+      "address": "00101390",
+      "type": "Function"
+    },
+    {
+      "name": "execl",
+      "address": "001013a0",
+      "type": "Function"
+    },
+    {
+      "name": "pthread_mutex_init",
+      "address": "001013b0",
+      "type": "Function"
+    },
+    {
+      "name": "pthread_mutex_lock",
+      "address": "001013c0",
+      "type": "Function"
+    },
+    {
+      "name": "rand",
+      "address": "001013d0",
+      "type": "Function"
+    },
+    {
+      "name": "__ctype_b_loc",
+      "address": "001013e0",
+      "type": "Function"
+    },
+    {
+      "name": "socket",
+      "address": "001013f0",
+      "type": "Function"
+    },
+    {
+      "name": "_start",
+      "address": "00101400",
+      "type": "Function"
+    },
+    {
+      "name": "deregister_tm_clones",
+      "address": "00101430",
+      "type": "Function"
+    },
+    {
+      "name": "register_tm_clones",
+      "address": "00101460",
+      "type": "Function"
+    },
+    {
+      "name": "__do_global_dtors_aux",
+      "address": "001014a0",
+      "type": "Function"
+    },
+    {
+      "name": "frame_dummy",
+      "address": "001014e0",
+      "type": "Function"
+    },
+    {
+      "name": "CWE78_OS_Command_Injection__char_connect_socket_execl_06_bad",
+      "address": "001014e9",
+      "type": "Function"
+    },
+    {
+      "name": "goodG2B1",
+      "address": "00101768",
+      "type": "Function"
+    },
+    {
+      "name": "goodG2B2",
+      "address": "00101875",
+      "type": "Function"
+    },
+    {
+      "name": "CWE78_OS_Command_Injection__char_connect_socket_execl_06_good",
+      "address": "00101971",
+      "type": "Function"
+    },
+    {
+      "name": "main",
+      "address": "00101990",
+      "type": "Function"
+    },
+    {
+      "name": "printLine",
+      "address": "00101a0b",
+      "type": "Function"
+    },
+    {
+      "name": "printWLine",
+      "address": "00101a31",
+      "type": "Function"
+    },
+    {
+      "name": "printIntLine",
+      "address": "00101a66",
+      "type": "Function"
+    },
+    {
+      "name": "printShortLine",
+      "address": "00101a91",
+      "type": "Function"
+    },
+    {
+      "name": "printFloatLine",
+      "address": "00101ac0",
+      "type": "Function"
+    },
+    {
+      "name": "printLongLine",
+      "address": "00101afb",
+      "type": "Function"
+    },
+    {
+      "name": "printLongLongLine",
+      "address": "00101b29",
+      "type": "Function"
+    },
+    {
+      "name": "printSizeTLine",
+      "address": "00101b57",
+      "type": "Function"
+    },
+    {
+      "name": "printHexCharLine",
+      "address": "00101b85",
+      "type": "Function"
+    },
+    {
+      "name": "printWcharLine",
+      "address": "00101bb3",
+      "type": "Function"
+    },
+    {
+      "name": "printUnsignedLine",
+      "address": "00101c10",
+      "type": "Function"
+    },
+    {
+      "name": "printHexUnsignedCharLine",
+      "address": "00101c3b",
+      "type": "Function"
+    },
+    {
+      "name": "printDoubleLine",
+      "address": "00101c69",
+      "type": "Function"
+    },
+    {
+      "name": "printStructLine",
+      "address": "00101c9a",
+      "type": "Function"
+    },
+    {
+      "name": "printBytesLine",
+      "address": "00101cd0",
+      "type": "Function"
+    },
+    {
+      "name": "decodeHexChars",
+      "address": "00101d36",
+      "type": "Function"
+    },
+    {
+      "name": "decodeHexWChars",
+      "address": "00101e3d",
+      "type": "Function"
+    },
+    {
+      "name": "globalReturnsTrue",
+      "address": "00101f1f",
+      "type": "Function"
+    },
+    {
+      "name": "globalReturnsFalse",
+      "address": "00101f2e",
+      "type": "Function"
+    },
+    {
+      "name": "globalReturnsTrueOrFalse",
+      "address": "00101f3d",
+      "type": "Function"
+    },
+    {
+      "name": "good1",
+      "address": "00101f5f",
+      "type": "Function"
+    },
+    {
+      "name": "good2",
+      "address": "00101f6a",
+      "type": "Function"
+    },
+    {
+      "name": "good3",
+      "address": "00101f75",
+      "type": "Function"
+    },
+    {
+      "name": "good4",
+      "address": "00101f80",
+      "type": "Function"
+    },
+    {
+      "name": "good5",
+      "address": "00101f8b",
+      "type": "Function"
+    },
+    {
+      "name": "good6",
+      "address": "00101f96",
+      "type": "Function"
+    },
+    {
+      "name": "good7",
+      "address": "00101fa1",
+      "type": "Function"
+    },
+    {
+      "name": "good8",
+      "address": "00101fac",
+      "type": "Function"
+    },
+    {
+      "name": "good9",
+      "address": "00101fb7",
+      "type": "Function"
+    },
+    {
+      "name": "bad1",
+      "address": "00101fc2",
+      "type": "Function"
+    },
+    {
+      "name": "bad2",
+      "address": "00101fcd",
+      "type": "Function"
+    },
+    {
+      "name": "bad3",
+      "address": "00101fd8",
+      "type": "Function"
+    },
+    {
+      "name": "bad4",
+      "address": "00101fe3",
+      "type": "Function"
+    },
+    {
+      "name": "bad5",
+      "address": "00101fee",
+      "type": "Function"
+    },
+    {
+      "name": "bad6",
+      "address": "00101ff9",
+      "type": "Function"
+    },
+    {
+      "name": "bad7",
+      "address": "00102004",
+      "type": "Function"
+    },
+    {
+      "name": "bad8",
+      "address": "0010200f",
+      "type": "Function"
+    },
+    {
+      "name": "bad9",
+      "address": "0010201a",
+      "type": "Function"
+    },
+    {
+      "name": "internal_start",
+      "address": "00102025",
+      "type": "Function"
+    },
+    {
+      "name": "stdThreadCreate",
+      "address": "0010205c",
+      "type": "Function"
+    },
+    {
+      "name": "stdThreadJoin",
+      "address": "00102129",
+      "type": "Function"
+    },
+    {
+      "name": "stdThreadDestroy",
+      "address": "00102184",
+      "type": "Function"
+    },
+    {
+      "name": "stdThreadLockCreate",
+      "address": "001021a7",
+      "type": "Function"
+    },
+    {
+      "name": "stdThreadLockAcquire",
+      "address": "00102220",
+      "type": "Function"
+    },
+    {
+      "name": "stdThreadLockRelease",
+      "address": "0010223f",
+      "type": "Function"
+    },
+    {
+      "name": "stdThreadLockDestroy",
+      "address": "0010225e",
+      "type": "Function"
+    },
+    {
+      "name": "_fini",
+      "address": "0010228c",
+      "type": "Function"
+    },
+    {
+      "name": "free",
+      "address": "00106000",
+      "type": "Function"
+    },
+    {
+      "name": "recv",
+      "address": "00106008",
+      "type": "Function"
+    },
+    {
+      "name": "__libc_start_main",
+      "address": "00106010",
+      "type": "Function"
+    },
+    {
+      "name": "_ITM_deregisterTMCloneTable",
+      "address": "00106018",
+      "type": "Function"
+    },
+    {
+      "name": "puts",
+      "address": "00106020",
+      "type": "Function"
+    },
+    {
+      "name": "iswxdigit",
+      "address": "00106028",
+      "type": "Function"
+    },
+    {
+      "name": "strlen",
+      "address": "00106030",
+      "type": "Function"
+    },
+    {
+      "name": "__stack_chk_fail",
+      "address": "00106038",
+      "type": "Function"
+    },
+    {
+      "name": "htons",
+      "address": "00106040",
+      "type": "Function"
+    },
+    {
+      "name": "strchr",
+      "address": "00106048",
+      "type": "Function"
+    },
+    {
+      "name": "printf",
+      "address": "00106050",
+      "type": "Function"
+    },
+    {
+      "name": "pthread_mutex_destroy",
+      "address": "00106058",
+      "type": "Function"
+    },
+    {
+      "name": "memset",
+      "address": "00106060",
+      "type": "Function"
+    },
+    {
+      "name": "close",
+      "address": "00106068",
+      "type": "Function"
+    },
+    {
+      "name": "srand",
+      "address": "00106070",
+      "type": "Function"
+    },
+    {
+      "name": "__isoc99_swscanf",
+      "address": "00106078",
+      "type": "Function"
+    },
+    {
+      "name": "inet_addr",
+      "address": "00106080",
+      "type": "Function"
+    },
+    {
+      "name": "__gmon_start__",
+      "address": "00106088",
+      "type": "Function"
+    },
+    {
+      "name": "time",
+      "address": "00106090",
+      "type": "Function"
+    },
+    {
+      "name": "pthread_mutex_unlock",
+      "address": "00106098",
+      "type": "Function"
+    },
+    {
+      "name": "pthread_exit",
+      "address": "001060a0",
+      "type": "Function"
+    },
+    {
+      "name": "malloc",
+      "address": "001060a8",
+      "type": "Function"
+    },
+    {
+      "name": "wprintf",
+      "address": "001060b0",
+      "type": "Function"
+    },
+    {
+      "name": "__isoc99_sscanf",
+      "address": "001060b8",
+      "type": "Function"
+    },
+    {
+      "name": "pthread_create",
+      "address": "001060c0",
+      "type": "Function"
+    },
+    {
+      "name": "connect",
+      "address": "001060c8",
+      "type": "Function"
+    },
+    {
+      "name": "_ITM_registerTMCloneTable",
+      "address": "001060d0",
+      "type": "Function"
+    },
+    {
+      "name": "pthread_join",
+      "address": "001060d8",
+      "type": "Function"
+    },
+    {
+      "name": "execl",
+      "address": "001060e0",
+      "type": "Function"
+    },
+    {
+      "name": "pthread_mutex_init",
+      "address": "001060e8",
+      "type": "Function"
+    },
+    {
+      "name": "pthread_mutex_lock",
+      "address": "001060f0",
+      "type": "Function"
+    },
+    {
+      "name": "rand",
+      "address": "001060f8",
+      "type": "Function"
+    },
+    {
+      "name": "__ctype_b_loc",
+      "address": "00106100",
+      "type": "Function"
+    },
+    {
+      "name": "socket",
+      "address": "00106108",
+      "type": "Function"
+    },
+    {
+      "name": "__cxa_finalize",
+      "address": "00106110",
+      "type": "Function"
+    }
+  ]
+}
