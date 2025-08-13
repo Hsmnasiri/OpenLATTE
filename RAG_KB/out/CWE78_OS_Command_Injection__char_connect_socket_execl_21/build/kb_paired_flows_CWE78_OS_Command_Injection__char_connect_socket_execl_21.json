@@ -9,25 +9,14 @@
         "code": "\nvoid FUN_0010166c(void)\n\n{\n  undefined8 uVar1;\n  long in_FS_OFFSET;\n  undefined8 local_78;\n  undefined8 local_70;\n  undefined8 local_68;\n  undefined8 local_60;\n  undefined8 local_58;\n  undefined8 local_50;\n  undefined8 local_48;\n  undefined8 local_40;\n  undefined8 local_38;\n  undefined8 local_30;\n  undefined8 local_28;\n  undefined8 local_20;\n  undefined4 local_18;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  local_78 = 0x20736c;\n  local_70 = 0;\n  local_68 = 0;\n  local_60 = 0;\n  local_58 = 0;\n  local_50 = 0;\n  local_48 = 0;\n  local_40 = 0;\n  local_38 = 0;\n  local_30 = 0;\n  local_28 = 0;\n  local_20 = 0;\n  local_18 = 0;\n  DAT_0010501c = 1;\n  uVar1 = FUN_001014e9(&local_78);\n  execl(\"/bin/sh\",\"/bin/sh\",&DAT_0010300e,uVar1,0);\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
       },
       {
-        "name": "FUN_001014e9",
-        "address": "001014e9",
-        "external": false,
-        "code": "\nchar * FUN_001014e9(char *param_1)\n\n{\n  int __fd;\n  int iVar1;\n  size_t sVar2;\n  ssize_t sVar3;\n  char *pcVar4;\n  long in_FS_OFFSET;\n  sockaddr local_28;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  if (DAT_0010501c != 0) {\n    sVar2 = strlen(param_1);\n    __fd = socket(2,1,6);\n    if (__fd != -1) {\n      memset(&local_28,0,0x10);\n      local_28.sa_family = 2;\n      local_28.sa_data._2_4_ = inet_addr(\"127.0.0.1\");\n      local_28.sa_data._0_2_ = htons(0x6987);\n      iVar1 = connect(__fd,&local_28,0x10);\n      if (iVar1 != -1) {\n        sVar3 = recv(__fd,param_1 + sVar2,99 - sVar2,0);\n        iVar1 = (int)sVar3;\n        if ((iVar1 != -1) && (iVar1 != 0)) {\n          param_1[(long)iVar1 + sVar2] = '\\0';\n          pcVar4 = strchr(param_1,0xd);\n          if (pcVar4 != (char *)0x0) {\n            *pcVar4 = '\\0';\n          }\n          pcVar4 = strchr(param_1,10);\n          if (pcVar4 != (char *)0x0) {\n            *pcVar4 = '\\0';\n          }\n        }\n      }\n    }\n    if (__fd != -1) {\n      close(__fd);\n    }\n  }\n  if (local_10 == *(long *)(in_FS_OFFSET + 0x28)) {\n    return param_1;\n  }\n                    /* WARNING: Subroutine does not return */\n  __stack_chk_fail();\n}\n\n",
-        "edge": {
-          "from": "FUN_0010166c",
-          "to": "FUN_001014e9",
-          "site": "00101707"
-        }
-      },
-      {
-        "name": "strlen",
-        "address": "00101260",
+        "name": "execl",
+        "address": "001013a0",
         "external": true,
         "code": "",
         "edge": {
-          "from": "FUN_001014e9",
-          "to": "strlen",
-          "site": "00101524"
+          "from": "FUN_0010166c",
+          "to": "execl",
+          "site": "00101740"
         }
       }
     ],
@@ -39,25 +28,14 @@
         "code": "\nvoid FUN_001017a9(void)\n\n{\n  undefined8 uVar1;\n  long in_FS_OFFSET;\n  undefined8 local_78;\n  undefined8 local_70;\n  undefined8 local_68;\n  undefined8 local_60;\n  undefined8 local_58;\n  undefined8 local_50;\n  undefined8 local_48;\n  undefined8 local_40;\n  undefined8 local_38;\n  undefined8 local_30;\n  undefined8 local_28;\n  undefined8 local_20;\n  undefined4 local_18;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  local_78 = 0x20736c;\n  local_70 = 0;\n  local_68 = 0;\n  local_60 = 0;\n  local_58 = 0;\n  local_50 = 0;\n  local_48 = 0;\n  local_40 = 0;\n  local_38 = 0;\n  local_30 = 0;\n  local_28 = 0;\n  local_20 = 0;\n  local_18 = 0;\n  DAT_00105020 = 0;\n  uVar1 = FUN_0010175c(&local_78);\n  execl(\"/bin/sh\",\"/bin/sh\",&DAT_0010300e,uVar1,0);\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
       },
       {
-        "name": "FUN_0010175c",
-        "address": "0010175c",
-        "external": false,
-        "code": "\nchar * FUN_0010175c(char *param_1)\n\n{\n  size_t sVar1;\n  \n  if (DAT_00105020 == 0) {\n    sVar1 = strlen(param_1);\n    builtin_strncpy(param_1 + sVar1,\"*.*\",4);\n  }\n  else {\n    FUN_00101a5f(\"Benign, fixed string\");\n  }\n  return param_1;\n}\n\n",
-        "edge": {
-          "from": "FUN_001017a9",
-          "to": "FUN_0010175c",
-          "site": "00101844"
-        }
-      },
-      {
-        "name": "strlen",
-        "address": "00101260",
+        "name": "execl",
+        "address": "001013a0",
         "external": true,
         "code": "",
         "edge": {
-          "from": "FUN_0010175c",
-          "to": "strlen",
-          "site": "0010178e"
+          "from": "FUN_001017a9",
+          "to": "execl",
+          "site": "0010187d"
         }
       }
     ]
