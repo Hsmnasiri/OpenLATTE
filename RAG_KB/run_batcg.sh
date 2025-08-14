@@ -2,16 +2,21 @@
 set -euo pipefail
 
 # === CONFIGURATION ===
-# Adjust these paths to match your system
 GHIDRA_DIR="/mnt/z/Papers/RAG_Papers/ghidra_11.3.2_PUBLIC_20250415/ghidra_11.3.2_PUBLIC"
 PROJECT_ROOT="/mnt/z/Papers/MyRAG/LATTE_ReImplementing"
 JULIET_BINARIES_DIR="${PROJECT_ROOT}/Data/build/stripped"
 RAG_KB_SCRIPT_DIR="${PROJECT_ROOT}/RAG_KB"
 
-# Ghidra settings
 ANALYZE_HEADLESS="${GHIDRA_DIR}/support/analyzeHeadless"
 MAX_DEPTH="${MAX_DEPTH:-6}"
 export MAX_DEPTH
+
+# --- Check for --force flag ---
+FORCE_RUN=false
+if [[ " $* " == *" --force "* ]]; then
+  FORCE_RUN=true
+  echo "Force flag detected. Re-running analysis for all binaries."
+fi
 
 # --- SCRIPT START ---
 echo "### Starting Batch Ghidra Analysis ###"
@@ -29,6 +34,12 @@ find "${JULIET_BINARIES_DIR}" -type f -name "*.out" | while read -r STRIPPED_BIN
     KB_CALLCHAINS_JSON="${BUILD_DIR}/kb_callchains_${BASE_NAME}.json"
 
     export OUT_BASE="${OUT_ROOT}" # Export for Ghidra scripts
+
+    # --- Skip Logic ---
+    if [ "$FORCE_RUN" = false ] && [ -f "$KB_CALLCHAINS_JSON" ]; then
+        echo "--- Skipping: ${BASE_NAME} (kb_callchains.json already exists) ---"
+        continue
+    fi
 
     echo "--- Processing: ${BASE_NAME} ---"
 
