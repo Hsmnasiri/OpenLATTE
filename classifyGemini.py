@@ -68,7 +68,7 @@ def classify_function(func_name: str, func_proto: str, mode: str, retries: int =
         raise ValueError("Please set your GOOGLE_API_KEY environment variable.")
 
     genai.configure(api_key=API_KEY)
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    model = genai.GenerativeModel('gemini-2.5-pro')
 
     if mode not in ["source", "sink"]:
         raise ValueError("Mode must be either 'source' or 'sink'.")

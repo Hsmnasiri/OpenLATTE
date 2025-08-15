@@ -7,7 +7,7 @@ import time
 # switch to the appropriate classification function based on the mode
 from classifyGemini import classify_function as classify_functionGemini
 
-RESULTS_DIR = "results"
+RESULTS_DIR = "resultss"
 CACHE_FILE = os.path.join(RESULTS_DIR, "classification_cache.json")
 
 def load_external_funcs(path: str) -> list:

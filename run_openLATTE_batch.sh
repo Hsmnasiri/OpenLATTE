@@ -7,7 +7,7 @@ PROJECT_ROOT="/mnt/z/Papers/MyRAG/LATTE_ReImplementing"
 JULIET_BINARIES_DIR="/mnt/z/juliet/C/dataset/test/sampleTest/small"
 
 SCRIPT_DIR="${PROJECT_ROOT}"
-RESULTS_DIR="${PROJECT_ROOT}/results"
+RESULTS_DIR="${PROJECT_ROOT}/resultss"
 ANALYZE_HEADLESS="${GHIDRA_DIR}/support/analyzeHeadless"
 WORKSPACE_DIR_BASE="${PROJECT_ROOT}/ghidra-workspace"
 
@@ -76,29 +76,51 @@ find "${JULIET_BINARIES_DIR}" -type f -name "*.out" -print0 | while IFS= read -r
   # Step 3: Find Dangerous Flows
   # --------------------------------------
   echo "[3/5] Finding dangerous flows for ${BASE_NAME}..."
-  DANGEROUS_FLOWS_FILE="${RESULTS_DIR}/dangerous_flows_${BASE_NAME}.json"
+  # توجه: export_flow_code.py عموماً به فایل .out.json نگاه می‌کند.
+  # اگر find_dangerous_flows.py آرگومان --output می‌گیرد، حتماً نام را با .out.json بده
+  DF_OUT_REL="results/dangerous_flows_${BASE_NAME}.out.json"
+  DF_OUT_ABS="${PROJECT_ROOT}/${DF_OUT_REL}"
+
+  # تضمین cwd = PROJECT_ROOT برای مسیر نسبی "results/"
+  pushd "${PROJECT_ROOT}" >/dev/null
 
   "${ANALYZE_HEADLESS}" "${WORKSPACE_DIR}" "${PROJECT_NAME}-DF" \
     -import "${STRIPPED_BIN}" \
     -scriptPath "${SCRIPT_DIR}" \
-    -postScript find_dangerous_flows.py --sinks "${SINK_FILE}" --sources "${SOURCE_FILE}" --output "${DANGEROUS_FLOWS_FILE}"
+    -postScript find_dangerous_flows.py --sinks "${SINK_FILE}" --sources "${SOURCE_FILE}" --output "${DF_OUT_REL}"
+
 
   # --------------------------------------
   # Step 4: Export Flow Code
   # --------------------------------------
   echo "[4/5] Exporting flow code for ${BASE_NAME}..."
-  FLOWS_WITH_CODE_FILE="${RESULTS_DIR}/flows_with_code_${BASE_NAME}.json"
+  FC_OUT_REL="results/flows_with_code_${BASE_NAME}.out.json"
+  FC_OUT_ABS="${PROJECT_ROOT}/${FC_OUT_REL}"
 
   "${ANALYZE_HEADLESS}" "${WORKSPACE_DIR}" "${PROJECT_NAME}-ExportCode" \
     -import "${STRIPPED_BIN}" \
     -scriptPath "${SCRIPT_DIR}" \
     -postScript export_flow_code.py
+  # ↑ این اسکریپت معمولاً خروجی را در results/ با .out.json می‌نویسد (وابسته به اسکریپت شما)
 
-  # برخی اسکریپت‌ها پسوند .out.json می‌سازند—اگر بود، جابه‌جا کن
-  cand_df="${RESULTS_DIR}/dangerous_flows_${BASE_NAME}.out.json"
-  cand_fc="${RESULTS_DIR}/flows_with_code_${BASE_NAME}.out.json"
-  [[ -f "${cand_df}" ]] && mv "${cand_df}" "${DANGEROUS_FLOWS_FILE}"
-  [[ -f "${cand_fc}" ]] && mv "${cand_fc}" "${FLOWS_WITH_CODE_FILE}"
+  popd >/dev/null
+
+  DANGEROUS_FLOWS_FILE="${RESULTS_DIR}/dangerous_flows_${BASE_NAME}.json"
+  FLOWS_WITH_CODE_FILE="${RESULTS_DIR}/flows_with_code_${BASE_NAME}.json"
+
+  # اگر .out.json وجود داشت، rename کن؛ وگرنه اگر همان نام نهایی را قبلاً نوشته بود، دست نزن
+  if [[ -f "${DF_OUT_ABS}" ]]; then mv -f "${DF_OUT_ABS}" "${DANGEROUS_FLOWS_FILE}"; fi
+  if [[ -f "${FC_OUT_ABS}" ]]; then mv -f "${FC_OUT_ABS}" "${FLOWS_WITH_CODE_FILE}"; fi
+
+  # امنیت: مطمئن شو فایل‌هایی که مرحله 5 لازم دارد وجود دارند
+  if [[ ! -f "${FLOWS_WITH_CODE_FILE}" ]]; then
+    echo "FATAL: flows_with_code file missing: ${FLOWS_WITH_CODE_FILE}" >&2
+    exit 1
+  fi
+  if [[ ! -f "${DANGEROUS_FLOWS_FILE}" ]]; then
+    echo "FATAL: dangerous_flows file missing: ${DANGEROUS_FLOWS_FILE}" >&2
+    exit 1
+  fi
 
   # --------------------------------------
   # Step 5: Inspect Flows with LLM
@@ -110,7 +132,7 @@ find "${JULIET_BINARIES_DIR}" -type f -name "*.out" -print0 | while IFS= read -r
     --flows-with-code "${FLOWS_WITH_CODE_FILE}" \
     --sources "${SOURCE_FILE}" \
     --output "${VULN_REPORTS_FILE}" \
-    --llm-mode gemini  # یا 'local'
+    --llm-mode gemini
 
   # پاکسازی workspace (چون در دفعات بعد دوباره می‌سازیم)
   rm -rf "${WORKSPACE_DIR}" 2>/dev/null || true
