@@ -18,5 +18,8 @@ __pycache__/
 
 *.gguf
 *.env
+/RAG_KB/out
+/RAG_KB/Oldout
+
 # .out
 # *.unstripped
