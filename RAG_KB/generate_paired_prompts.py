@@ -1,60 +1,71 @@
-import json
 import argparse
+import json
 import os
-import pathlib
+from pathlib import Path
 
-# This prompt is inspired by the methodology in the Vul-RAG paper.
-PAIRED_PROMPT_TEMPLATE = """
-You are an expert security analyst. I will provide you with a pair of decompiled C functions: one is vulnerable, and the other is the patched, non-vulnerable version. Your task is to analyze both and provide a structured analysis in JSON format.
+def main():
+    """
+    Generates detailed analysis prompts from pre-processed paired-flow JSON files.
+    This script reads a JSON file containing pairs of vulnerable ('bad_flow') and
+    patched ('good_flow') execution chains and formats them into a structured
+    prompt for an LLM security analyst.
+    """
+    parser = argparse.ArgumentParser(description="Generate flow-based prompts from paired flow data.")
+    # These arguments match the ones used in your build_kb_batch.sh script
+    parser.add_argument("--input", required=True, help="Path to the kb_paired_flows_...json file.")
+    parser.add_argument("--output-dir", required=True, help="Directory to save the generated prompt files.")
+    
+    args = parser.parse_args()
 
-Here is the vulnerable code:
-```c
-{vulnerable_code}
-```
+    input_path = Path(args.input)
+    output_dir = Path(args.output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
 
-Here is the patched (non-vulnerable) code:
-```c
-{patched_code}
-```
+    try:
+        with open(input_path, 'r', encoding='utf-8') as f:
+            # The input JSON file contains a list of flow pairs
+            paired_flows_data = json.load(f)
+    except FileNotFoundError:
+        print(f"Error: Input file not found at {input_path}")
+        return
+    except json.JSONDecodeError:
+        print(f"Error: Could not decode JSON from {input_path}")
+        return
 
-Please provide your analysis in the following JSON format. Do not include any other text or explanations outside of the JSON block.
+    # Process each pair of vulnerable/patched flows found in the input file
+    for i, pair in enumerate(paired_flows_data):
+        vulnerable_flow = pair.get("bad_flow")
+        patched_flow = pair.get("good_flow")
+        base_name = pair.get("vulnerability_base_name", f"unknown_pair_{i}")
 
-```json
-{{
-  "functional_semantics": "Describe the shared purpose of these two functions in 1-2 sentences. What are they supposed to do?",
-  "vulnerability_cause": "Based on the differences between the vulnerable and patched code, explain the root cause of the vulnerability. Be specific about what is missing or incorrect in the vulnerable version.",
-  "fixing_solution": "Describe the patch. Explain exactly how the changes in the patched code mitigate the vulnerability."
-}}
-```
-"""
+        # Ensure both flows exist before creating a prompt
+        if not vulnerable_flow or not patched_flow:
+            print(f"Warning: Skipping pair for '{base_name}' due to missing vulnerable or patched flow data.")
+            continue
 
-def generate_prompts(input_path, output_dir):
-    with open(input_path, 'r') as f:
-        paired_flows = json.load(f)
+        # This is the ideal prompt structure you requested
+        prompt = {
+            "analysis_task": {
+                "instruction": "You are an expert security analyst. The following JSON contains two code execution paths: one vulnerable and one patched. Each path is an ordered sequence of functions from a data source to a sink. Your task is to analyze the entire flow of data and control between these functions. Based on the differences, provide a structured analysis in the specified JSON format without any additional text.",
+                "vulnerable_flow": vulnerable_flow,
+                "patched_flow": patched_flow
+            },
+            "output_format": {
+                "functional_semantics": "Describe the overall purpose of this code flow across all provided functions.",
+                "vulnerability_cause": "Based on the entire execution path, explain the root cause of the vulnerability. Detail how data flows from the source in the first function to the sink in the subsequent function(s) and where the logic fails in the vulnerable version.",
+                "fixing_solution": "Describe the patch. Explain exactly how the changes in the patched flow, including any new checks or function calls, mitigate the vulnerability by interrupting the unsafe data flow."
+            }
+        }
 
-    # Ensure the output directory exists
-    pathlib.Path(output_dir).mkdir(parents=True, exist_ok=True)
-
-    for i, pair in enumerate(paired_flows):
-        vulnerable_func = pair['bad_flow'][0] # The first function in the chain
-        patched_func = pair['good_flow'][0]   # The first function in the chain
-
-        prompt = PAIRED_PROMPT_TEMPLATE.format(
-            vulnerable_code=vulnerable_func.get("code", "Code not available."),
-            patched_code=patched_func.get("code", "Code not available.")
-        )
+        # Create a unique filename for each prompt
+        output_filename = f"prompt_{base_name}_{i}.txt"
+        output_path = output_dir / output_filename
         
-        # FIX: Use the correct key 'vulnerability_base_name' instead of 'sink'
-        base_name = pair['vulnerability_base_name']
-        prompt_filename = f"prompt_{base_name}_{i}.txt"
-        with open(os.path.join(output_dir, prompt_filename), 'w') as f:
-            f.write(prompt)
+        # Write the complete JSON prompt to the output text file
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(prompt, f, indent=4)
 
-    print(f"[DONE] Generated {len(paired_flows)} annotation prompts in {output_dir}")
+    print(f"Successfully generated {len(paired_flows_data)} prompts in: {output_dir}")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Generate annotation prompts for paired flows.")
-    parser.add_argument('--input', required=True, help="Path to the paired flows JSON file.")
-    parser.add_argument('--output-dir', required=True, help="Directory to save the prompt files.")
-    args = parser.parse_args()
-    generate_prompts(args.input, args.output_dir)
+    main()

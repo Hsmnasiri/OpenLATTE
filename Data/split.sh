@@ -89,8 +89,8 @@ for CWE in "${CWES[@]}"; do
     dir="$(dirname "$f")"
     if [[ "$base" == *.unstripped ]]; then
       stem="${base%.unstripped}"
-    elif [[ "$base" == *..out ]]; then
-      stem="${base%..out}"
+    elif [[ "$base" == *.out ]]; then
+      stem="${base%.out}"
     else
       continue
     fi
@@ -125,14 +125,14 @@ for CWE in "${CWES[@]}"; do
 
   for stem_path in "${train_fams[@]}"; do
     dbg="$stem_path".unstripped
-    str="$stem_path"..out
+    str="$stem_path".out
     [[ -f "$dbg" ]] && copy_file "$dbg" "$train_dbg/$(basename "$dbg")"
     [[ -f "$str" ]] && copy_file "$str" "$train_str/$(basename "$str")"
   done
 
   for stem_path in "${test_fams[@]}"; do
     dbg="$stem_path".unstripped
-    str="$stem_path"..out
+    str="$stem_path".out
     [[ -f "$dbg" ]] && copy_file "$dbg" "$test_dbg/$(basename "$dbg")"
     [[ -f "$str" ]] && copy_file "$str" "$test_str/$(basename "$str")"
   done
