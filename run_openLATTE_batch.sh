@@ -20,14 +20,12 @@ mkdir -p "${RESULTS_DIR}" "${WORKSPACE_DIR_BASE}"
 # robust find (spaces-safe)
 find "${JULIET_BINARIES_DIR}" -type f -name "*.out" -print0 | while IFS= read -r -d '' STRIPPED_BIN; do
   BASE_NAME="$(basename "${STRIPPED_BIN}" .out)"
-  # یکتا برای جلوگیری از تداخل اجرای همزمان
   WORKSPACE_DIR="${WORKSPACE_DIR_BASE}/${BASE_NAME}-analysis-$$"
   PROJECT_NAME="${BASE_NAME}"
 
   echo
   echo "--- Processing: ${BASE_NAME} ---"
 
-  # هر بار از صفر بساز تا مطمئن باشیم پوشه وجود داره و پاکه
   rm -rf "${WORKSPACE_DIR}" 2>/dev/null || true
   mkdir -p "${WORKSPACE_DIR}"
 
@@ -42,8 +40,6 @@ find "${JULIET_BINARIES_DIR}" -type f -name "*.out" -print0 | while IFS= read -r
     -scriptPath "${SCRIPT_DIR}" \
     -postScript export_external_funcs.py
 
-  # تلاش برای پیدا کردن خروجی بسته به اسکریپت شما
-  # مسیرهای محتمل را امتحان کن و در صورت وجود منتقل کن
   cand1="${WORKSPACE_DIR_BASE}/external_funcs_${BASE_NAME}.out.txt"
   cand2="${WORKSPACE_DIR}/external_funcs_${BASE_NAME}.out.txt"
   cand3="${RESULTS_DIR}/external_funcs_${BASE_NAME}.out.txt"
@@ -76,12 +72,9 @@ find "${JULIET_BINARIES_DIR}" -type f -name "*.out" -print0 | while IFS= read -r
   # Step 3: Find Dangerous Flows
   # --------------------------------------
   echo "[3/5] Finding dangerous flows for ${BASE_NAME}..."
-  # توجه: export_flow_code.py عموماً به فایل .out.json نگاه می‌کند.
-  # اگر find_dangerous_flows.py آرگومان --output می‌گیرد، حتماً نام را با .out.json بده
   DF_OUT_REL="results/dangerous_flows_${BASE_NAME}.out.json"
   DF_OUT_ABS="${PROJECT_ROOT}/${DF_OUT_REL}"
 
-  # تضمین cwd = PROJECT_ROOT برای مسیر نسبی "results/"
   pushd "${PROJECT_ROOT}" >/dev/null
 
   "${ANALYZE_HEADLESS}" "${WORKSPACE_DIR}" "${PROJECT_NAME}-DF" \
@@ -101,18 +94,15 @@ find "${JULIET_BINARIES_DIR}" -type f -name "*.out" -print0 | while IFS= read -r
     -import "${STRIPPED_BIN}" \
     -scriptPath "${SCRIPT_DIR}" \
     -postScript export_flow_code.py
-  # ↑ این اسکریپت معمولاً خروجی را در results/ با .out.json می‌نویسد (وابسته به اسکریپت شما)
 
   popd >/dev/null
 
   DANGEROUS_FLOWS_FILE="${RESULTS_DIR}/dangerous_flows_${BASE_NAME}.json"
   FLOWS_WITH_CODE_FILE="${RESULTS_DIR}/flows_with_code_${BASE_NAME}.json"
 
-  # اگر .out.json وجود داشت، rename کن؛ وگرنه اگر همان نام نهایی را قبلاً نوشته بود، دست نزن
   if [[ -f "${DF_OUT_ABS}" ]]; then mv -f "${DF_OUT_ABS}" "${DANGEROUS_FLOWS_FILE}"; fi
   if [[ -f "${FC_OUT_ABS}" ]]; then mv -f "${FC_OUT_ABS}" "${FLOWS_WITH_CODE_FILE}"; fi
 
-  # امنیت: مطمئن شو فایل‌هایی که مرحله 5 لازم دارد وجود دارند
   if [[ ! -f "${FLOWS_WITH_CODE_FILE}" ]]; then
     echo "FATAL: flows_with_code file missing: ${FLOWS_WITH_CODE_FILE}" >&2
     exit 1
@@ -134,7 +124,6 @@ find "${JULIET_BINARIES_DIR}" -type f -name "*.out" -print0 | while IFS= read -r
     --output "${VULN_REPORTS_FILE}" \
     --llm-mode gemini
 
-  # پاکسازی workspace (چون در دفعات بعد دوباره می‌سازیم)
   rm -rf "${WORKSPACE_DIR}" 2>/dev/null || true
 
   echo "--- Finished: ${BASE_NAME} ---"

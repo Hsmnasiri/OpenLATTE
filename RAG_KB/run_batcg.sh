@@ -4,7 +4,7 @@ set -euo pipefail
 # === CONFIGURATION ===
 GHIDRA_DIR="/mnt/z/Papers/RAG_Papers/ghidra_11.3.2_PUBLIC_20250415/ghidra_11.3.2_PUBLIC"
 PROJECT_ROOT="/mnt/z/Papers/MyRAG/LATTE_ReImplementing"
-JULIET_BINARIES_DIR="/mnt/z/juliet/C/dataset/train/CWE78_OS_Command_Injection/stripped"
+JULIET_BINARIES_DIR="/mnt/z/juliet/C/dataset/train/CWE606_Unchecked_Loop_Condition/stripped"
 RAG_KB_SCRIPT_DIR="${PROJECT_ROOT}/RAG_KB"
 
 ANALYZE_HEADLESS="${GHIDRA_DIR}/support/analyzeHeadless"
@@ -24,7 +24,7 @@ echo "### Starting Batch Ghidra Analysis ###"
 # Find all stripped binaries in the Juliet build directory
 find "${JULIET_BINARIES_DIR}" -type f -name "*.out" | while read -r STRIPPED_BIN; do
     BASE_NAME=$(basename "${STRIPPED_BIN}" .out)
-    UNSTRIPPED_BIN="/mnt/z/juliet/C/dataset/train/CWE78_OS_Command_Injection/dbg/${BASE_NAME}.unstripped"
+    UNSTRIPPED_BIN="/mnt/z/juliet/C/dataset/train/CWE606_Unchecked_Loop_Condition/dbg/${BASE_NAME}.unstripped"
 
     # Define output paths for this specific binary
     OUT_ROOT="${RAG_KB_SCRIPT_DIR}/out/${BASE_NAME}"
