@@ -1,0 +1,32 @@
+[
+  {
+    "sink_function": "__isoc99_fscanf",
+    "sink_location": "00101c86",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101c47",
+        "call_location": "00101c86",
+        "callee_func": "__isoc99_fscanf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "__isoc99_fscanf",
+      "called_from_function": "FUN_00101c47"
+    }
+  },
+  {
+    "sink_function": "__isoc99_fscanf",
+    "sink_location": "00101d3e",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101cff",
+        "call_location": "00101d3e",
+        "callee_func": "__isoc99_fscanf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "__isoc99_fscanf",
+      "called_from_function": "FUN_00101cff"
+    }
+  }
+]

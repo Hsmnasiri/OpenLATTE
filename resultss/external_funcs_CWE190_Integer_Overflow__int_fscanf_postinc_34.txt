@@ -1,0 +1,132 @@
+[
+  {
+    "name": "free",
+    "addr": "0x1",
+    "proto": "void free(void * __ptr)"
+  },
+  {
+    "name": "__libc_start_main",
+    "addr": "0x2",
+    "proto": "undefined __libc_start_main()"
+  },
+  {
+    "name": "__isoc99_fscanf",
+    "addr": "0x3",
+    "proto": "undefined __isoc99_fscanf()"
+  },
+  {
+    "name": "puts",
+    "addr": "0x4",
+    "proto": "int puts(char * __s)"
+  },
+  {
+    "name": "iswxdigit",
+    "addr": "0x5",
+    "proto": "int iswxdigit(wint_t __wc)"
+  },
+  {
+    "name": "__stack_chk_fail",
+    "addr": "0x6",
+    "proto": "undefined __stack_chk_fail()"
+  },
+  {
+    "name": "printf",
+    "addr": "0x7",
+    "proto": "int printf(char * __format, ...)"
+  },
+  {
+    "name": "pthread_mutex_destroy",
+    "addr": "0x8",
+    "proto": "int pthread_mutex_destroy(pthread_mutex_t * __mutex)"
+  },
+  {
+    "name": "srand",
+    "addr": "0x9",
+    "proto": "void srand(uint __seed)"
+  },
+  {
+    "name": "__isoc99_swscanf",
+    "addr": "0xa",
+    "proto": "undefined __isoc99_swscanf()"
+  },
+  {
+    "name": "time",
+    "addr": "0xb",
+    "proto": "time_t time(time_t * __timer)"
+  },
+  {
+    "name": "pthread_mutex_unlock",
+    "addr": "0xc",
+    "proto": "int pthread_mutex_unlock(pthread_mutex_t * __mutex)"
+  },
+  {
+    "name": "pthread_exit",
+    "addr": "0xd",
+    "proto": "void pthread_exit(void * __retval)"
+  },
+  {
+    "name": "malloc",
+    "addr": "0xe",
+    "proto": "void * malloc(size_t __size)"
+  },
+  {
+    "name": "wprintf",
+    "addr": "0xf",
+    "proto": "int wprintf(wchar_t * __format, ...)"
+  },
+  {
+    "name": "__isoc99_sscanf",
+    "addr": "0x10",
+    "proto": "undefined __isoc99_sscanf()"
+  },
+  {
+    "name": "pthread_create",
+    "addr": "0x11",
+    "proto": "int pthread_create(pthread_t * __newthread, pthread_attr_t * __attr, __start_routine * __start_routine, void * __arg)"
+  },
+  {
+    "name": "pthread_join",
+    "addr": "0x12",
+    "proto": "int pthread_join(pthread_t __th, void * * __thread_return)"
+  },
+  {
+    "name": "pthread_mutex_init",
+    "addr": "0x13",
+    "proto": "int pthread_mutex_init(pthread_mutex_t * __mutex, pthread_mutexattr_t * __mutexattr)"
+  },
+  {
+    "name": "pthread_mutex_lock",
+    "addr": "0x14",
+    "proto": "int pthread_mutex_lock(pthread_mutex_t * __mutex)"
+  },
+  {
+    "name": "rand",
+    "addr": "0x15",
+    "proto": "int rand(void)"
+  },
+  {
+    "name": "__ctype_b_loc",
+    "addr": "0x16",
+    "proto": "ushort * * __ctype_b_loc(void)"
+  },
+  {
+    "name": "__cxa_finalize",
+    "addr": "0x17",
+    "proto": "undefined __cxa_finalize()"
+  },
+  {
+    "name": "_ITM_deregisterTMCloneTable",
+    "addr": "0x18",
+    "proto": "undefined _ITM_deregisterTMCloneTable()"
+  },
+  {
+    "name": "_ITM_registerTMCloneTable",
+    "addr": "0x19",
+    "proto": "undefined _ITM_registerTMCloneTable()"
+  },
+  {
+    "name": "__gmon_start__",
+    "addr": "0x1a",
+    "proto": "undefined __gmon_start__()"
+  }
+]

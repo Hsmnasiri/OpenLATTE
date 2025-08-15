@@ -1,0 +1,125 @@
+[
+  {
+    "function": "wcscat",
+    "addr": "0x1",
+    "proto": "wchar_t * wcscat(wchar_t * __dest, wchar_t * __src)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        2
+      ],
+      "answer": "(wcscat; 2)"
+    }
+  },
+  {
+    "function": "free",
+    "addr": "0x3",
+    "proto": "void free(void * __ptr)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "(free; 1)"
+    }
+  },
+  {
+    "function": "wcsncat",
+    "addr": "0x6",
+    "proto": "wchar_t * wcsncat(wchar_t * __dest, wchar_t * __src, size_t __n)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1,
+        2
+      ],
+      "answer": "(wcsncat; 1,2)"
+    }
+  },
+  {
+    "function": "system",
+    "addr": "0x9",
+    "proto": "int system(char * __command)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "(system; 1)"
+    }
+  },
+  {
+    "function": "printf",
+    "addr": "0xa",
+    "proto": "int printf(char * __format, ...)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "(printf; 1)"
+    }
+  },
+  {
+    "function": "__isoc99_swscanf",
+    "addr": "0xe",
+    "proto": "undefined __isoc99_swscanf()",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1,
+        2
+      ],
+      "answer": "(__isoc99_swscanf; 1,2)"
+    }
+  },
+  {
+    "function": "malloc",
+    "addr": "0x12",
+    "proto": "void * malloc(size_t __size)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "(malloc; 1)"
+    }
+  },
+  {
+    "function": "wprintf",
+    "addr": "0x13",
+    "proto": "int wprintf(wchar_t * __format, ...)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "(wprintf; 1)"
+    }
+  },
+  {
+    "function": "__isoc99_sscanf",
+    "addr": "0x14",
+    "proto": "undefined __isoc99_sscanf()",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        2
+      ],
+      "answer": "(__isoc99_sscanf; 2)"
+    }
+  },
+  {
+    "function": "pthread_create",
+    "addr": "0x15",
+    "proto": "int pthread_create(pthread_t * __newthread, pthread_attr_t * __attr, __start_routine * __start_routine, void * __arg)",
+    "sink_result": {
+      "is_true": true,
+      "params": [
+        3,
+        4
+      ],
+      "answer": "(pthread_create; 3,4)"
+    }
+  }
+]

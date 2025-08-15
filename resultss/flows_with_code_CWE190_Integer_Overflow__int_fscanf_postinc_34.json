@@ -1,0 +1,34 @@
+[
+  {
+    "sink_function": "__isoc99_fscanf",
+    "sink_location": "00101c86",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101c47",
+        "call_location": "00101c86",
+        "callee_func": "__isoc99_fscanf",
+        "code": "\nvoid FUN_00101c47(void)\n\n{\n  long in_FS_OFFSET;\n  int local_20;\n  int local_1c;\n  int local_18;\n  int local_14;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  local_20 = 0;\n  __isoc99_fscanf(stdin,&DAT_00102078,&local_20);\n  local_1c = local_20;\n  local_18 = local_20 + 1;\n  local_14 = local_18;\n  FUN_00101424(local_18);\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "__isoc99_fscanf",
+      "called_from_function": "FUN_00101c47"
+    }
+  },
+  {
+    "sink_function": "__isoc99_fscanf",
+    "sink_location": "00101d3e",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101cff",
+        "call_location": "00101d3e",
+        "callee_func": "__isoc99_fscanf",
+        "code": "\nvoid FUN_00101cff(void)\n\n{\n  long in_FS_OFFSET;\n  int local_20;\n  int local_1c;\n  int local_18;\n  int local_14;\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  local_20 = 0;\n  __isoc99_fscanf(stdin,&DAT_00102078,&local_20);\n  local_1c = local_20;\n  local_18 = local_20;\n  if (local_20 == 0x7fffffff) {\n    FUN_001013c9(\"data value is too large to perform arithmetic safely.\");\n  }\n  else {\n    local_18 = local_20 + 1;\n    local_14 = local_18;\n    FUN_00101424(local_18);\n  }\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "__isoc99_fscanf",
+      "called_from_function": "FUN_00101cff"
+    }
+  }
+]

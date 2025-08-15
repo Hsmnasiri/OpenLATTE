@@ -1,0 +1,455 @@
+{
+  "free::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__libc_start_main::source": {
+    "is_true": true,
+    "params": [
+      2,
+      3
+    ],
+    "answer": "(__libc_start_main; 2,3)"
+  },
+  "__isoc99_fscanf::source": {
+    "is_true": true,
+    "params": [
+      3
+    ],
+    "answer": "(__isoc99_fscanf; 3)"
+  },
+  "puts::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "iswxdigit::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__stack_chk_fail::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "printf::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "pthread_mutex_destroy::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "srand::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__isoc99_swscanf::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "time::source": {
+    "is_true": true,
+    "params": [
+      1
+    ],
+    "answer": "(time; 1)"
+  },
+  "pthread_mutex_unlock::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "pthread_exit::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "malloc::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "wprintf::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__isoc99_sscanf::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "pthread_create::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "pthread_join::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "pthread_mutex_init::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "pthread_mutex_lock::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "rand::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__ctype_b_loc::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__cxa_finalize::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "_ITM_deregisterTMCloneTable::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "_ITM_registerTMCloneTable::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__gmon_start__::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "free::sink": {
+    "is_true": true,
+    "params": [
+      1
+    ],
+    "answer": "(free; 1)"
+  },
+  "__libc_start_main::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__isoc99_fscanf::sink": {
+    "is_true": true,
+    "params": [
+      2,
+      3
+    ],
+    "answer": "(__isoc99_fscanf; 2,3)"
+  },
+  "puts::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "iswxdigit::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__stack_chk_fail::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "printf::sink": {
+    "is_true": true,
+    "params": [
+      1
+    ],
+    "answer": "(printf; 1)"
+  },
+  "pthread_mutex_destroy::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "srand::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__isoc99_swscanf::sink": {
+    "is_true": true,
+    "params": [
+      1,
+      2
+    ],
+    "answer": "(__isoc99_swscanf; 1,2)"
+  },
+  "time::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "pthread_mutex_unlock::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "pthread_exit::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "malloc::sink": {
+    "is_true": true,
+    "params": [
+      1
+    ],
+    "answer": "(malloc; 1)"
+  },
+  "wprintf::sink": {
+    "is_true": true,
+    "params": [
+      1
+    ],
+    "answer": "(wprintf; 1)"
+  },
+  "__isoc99_sscanf::sink": {
+    "is_true": true,
+    "params": [
+      2
+    ],
+    "answer": "(__isoc99_sscanf; 2)"
+  },
+  "pthread_create::sink": {
+    "is_true": true,
+    "params": [
+      3,
+      4
+    ],
+    "answer": "(pthread_create; 3,4)"
+  },
+  "pthread_join::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "pthread_mutex_init::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "pthread_mutex_lock::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "rand::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__ctype_b_loc::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__cxa_finalize::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "_ITM_deregisterTMCloneTable::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "_ITM_registerTMCloneTable::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__gmon_start__::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "recv::source": {
+    "is_true": true,
+    "params": [
+      2
+    ],
+    "answer": "(recv; 2)"
+  },
+  "strlen::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "htons::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "strchr::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "memset::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "close::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "inet_addr::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "connect::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "socket::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "recv::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "strlen::sink": {
+    "is_true": true,
+    "params": [
+      1
+    ],
+    "answer": "(strlen; 1)"
+  },
+  "htons::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "strchr::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "memset::sink": {
+    "is_true": true,
+    "params": [
+      3
+    ],
+    "answer": "(memset; 3)"
+  },
+  "close::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "inet_addr::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "connect::sink": {
+    "is_true": true,
+    "params": [
+      2
+    ],
+    "answer": "(connect; 2)"
+  },
+  "socket::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "wcscat::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "getenv::source": {
+    "is_true": true,
+    "params": [
+      0
+    ],
+    "answer": "(getenv; 0)"
+  },
+  "wcsncat::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "system::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "wcslen::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "exit::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "wcscat::sink": {
+    "is_true": true,
+    "params": [
+      2
+    ],
+    "answer": "(wcscat; 2)"
+  },
+  "getenv::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "wcsncat::sink": {
+    "is_true": true,
+    "params": [
+      1,
+      2
+    ],
+    "answer": "(wcsncat; 1,2)"
+  },
+  "system::sink": {
+    "is_true": true,
+    "params": [
+      1
+    ],
+    "answer": "(system; 1)"
+  },
+  "wcslen::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "exit::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  }
+}

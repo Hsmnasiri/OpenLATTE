@@ -1,0 +1,17 @@
+[
+  {
+    "sink_function": "wcsncat",
+    "sink_location": "00101db2",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101ce7",
+        "call_location": "00101db2",
+        "callee_func": "wcsncat"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "getenv",
+      "called_from_function": "FUN_00101ce7"
+    }
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "sink_function": "wcsncat",
+    "sink_location": "00101db2",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101ce7",
+        "call_location": "00101db2",
+        "callee_func": "wcsncat",
+        "code": "\nvoid FUN_00101ce7(void)\n\n{\n  size_t sVar1;\n  wchar_t *__src;\n  long lVar2;\n  undefined8 *puVar3;\n  long in_FS_OFFSET;\n  wchar_t local_1a8 [4];\n  undefined8 local_198 [49];\n  long local_10;\n  \n  local_10 = *(long *)(in_FS_OFFSET + 0x28);\n  builtin_wcsncpy(local_1a8,L\"ls \",4);\n  puVar3 = local_198;\n  for (lVar2 = 0x30; lVar2 != 0; lVar2 = lVar2 + -1) {\n    *puVar3 = 0;\n    puVar3 = puVar3 + 1;\n  }\n  sVar1 = wcslen(local_1a8);\n  __src = (wchar_t *)getenv(\"A\");\n  if (__src != (wchar_t *)0x0) {\n    wcsncat(local_1a8 + sVar1,__src,99 - sVar1);\n  }\n  DAT_00104030 = local_1a8;\n  FUN_00101f1e();\n  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return;\n}\n\n"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "getenv",
+      "called_from_function": "FUN_00101ce7"
+    }
+  }
+]

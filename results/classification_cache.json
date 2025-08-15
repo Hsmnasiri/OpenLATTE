@@ -1,0 +1,390 @@
+{
+  "free::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "recv::source": {
+    "is_true": true,
+    "params": [
+      2
+    ],
+    "answer": "(recv; 2)"
+  },
+  "__libc_start_main::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "puts::source": {
+    "is_true": true,
+    "params": [
+      1
+    ],
+    "answer": "(puts; 1)"
+  },
+  "iswxdigit::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "strlen::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__stack_chk_fail::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "htons::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "strchr::source": {
+    "is_true": true,
+    "params": [
+      1
+    ],
+    "answer": "(strchr; 1)"
+  },
+  "printf::source": {
+    "is_true": true,
+    "params": [
+      1
+    ],
+    "answer": "(printf; 1)"
+  },
+  "pthread_mutex_destroy::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "memset::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "close::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "srand::source": {
+    "is_true": true,
+    "params": [
+      1
+    ],
+    "answer": "(srand; 1)"
+  },
+  "__isoc99_swscanf::source": {
+    "is_true": true,
+    "params": [
+      2
+    ],
+    "answer": "(__isoc99_swscanf; 2)"
+  },
+  "inet_addr::source": {
+    "is_true": true,
+    "params": [
+      1
+    ],
+    "answer": "(inet_addr; 1)"
+  },
+  "fprintf::source": {
+    "is_true": true,
+    "params": [
+      2
+    ],
+    "answer": "(fprintf; 2)"
+  },
+  "time::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "pthread_mutex_unlock::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "pthread_exit::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "malloc::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "wprintf::source": {
+    "is_true": true,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__isoc99_sscanf::source": {
+    "is_true": true,
+    "params": [
+      2
+    ],
+    "answer": "(__isoc99_sscanf; 2)"
+  },
+  "pthread_create::source": {
+    "is_true": true,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "connect::source": {
+    "is_true": true,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "pthread_join::source": {
+    "is_true": true,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "pthread_mutex_init::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "pthread_mutex_lock::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "rand::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__ctype_b_loc::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "socket::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__cxa_finalize::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "_ITM_deregisterTMCloneTable::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "_ITM_registerTMCloneTable::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__gmon_start__::source": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "free::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "recv::sink": {
+    "is_true": true,
+    "params": [
+      2
+    ],
+    "answer": "(recv; 2)"
+  },
+  "__libc_start_main::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "puts::sink": {
+    "is_true": true,
+    "params": [
+      1
+    ],
+    "answer": "(puts; 1)"
+  },
+  "iswxdigit::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "strlen::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__stack_chk_fail::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "htons::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "strchr::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "printf::sink": {
+    "is_true": true,
+    "params": [
+      1
+    ],
+    "answer": "(printf; 1)"
+  },
+  "pthread_mutex_destroy::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "memset::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "close::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "srand::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__isoc99_swscanf::sink": {
+    "is_true": true,
+    "params": [
+      2
+    ],
+    "answer": "(__isoc99_swscanf; 2)"
+  },
+  "inet_addr::sink": {
+    "is_true": true,
+    "params": [
+      1
+    ],
+    "answer": "(inet_addr; 1)"
+  },
+  "fprintf::sink": {
+    "is_true": true,
+    "params": [
+      2
+    ],
+    "answer": "(fprintf; 2)"
+  },
+  "time::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "pthread_mutex_unlock::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "pthread_exit::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "malloc::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "wprintf::sink": {
+    "is_true": true,
+    "params": [
+      1
+    ],
+    "answer": "(wprintf; 1)"
+  },
+  "__isoc99_sscanf::sink": {
+    "is_true": true,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "pthread_create::sink": {
+    "is_true": true,
+    "params": [
+      4
+    ],
+    "answer": "(pthread_create; 4)"
+  },
+  "connect::sink": {
+    "is_true": true,
+    "params": [
+      2
+    ],
+    "answer": "(connect; 2)"
+  },
+  "pthread_join::sink": {
+    "is_true": true,
+    "params": [
+      2
+    ],
+    "answer": "(pthread_join; 2)"
+  },
+  "pthread_mutex_init::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "pthread_mutex_lock::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "rand::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__ctype_b_loc::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "socket::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__cxa_finalize::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "_ITM_deregisterTMCloneTable::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "_ITM_registerTMCloneTable::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  },
+  "__gmon_start__::sink": {
+    "is_true": false,
+    "params": [],
+    "answer": "(NO)"
+  }
+}

@@ -1,0 +1,39 @@
+[
+  {
+    "function": "__libc_start_main",
+    "addr": "0x2",
+    "proto": "undefined __libc_start_main()",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        2,
+        3
+      ],
+      "answer": "(__libc_start_main; 2,3)"
+    }
+  },
+  {
+    "function": "__isoc99_fscanf",
+    "addr": "0x3",
+    "proto": "undefined __isoc99_fscanf()",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        3
+      ],
+      "answer": "(__isoc99_fscanf; 3)"
+    }
+  },
+  {
+    "function": "time",
+    "addr": "0xb",
+    "proto": "time_t time(time_t * __timer)",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "(time; 1)"
+    }
+  }
+]

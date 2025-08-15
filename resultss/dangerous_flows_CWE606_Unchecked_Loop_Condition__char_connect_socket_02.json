@@ -1,0 +1,182 @@
+[
+  {
+    "sink_function": "strlen",
+    "sink_location": "00101deb",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101d47",
+        "call_location": "00101deb",
+        "callee_func": "strlen"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "recv",
+      "called_from_function": "FUN_00101d47"
+    }
+  },
+  {
+    "sink_function": "memset",
+    "sink_location": "00101e2f",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101d47",
+        "call_location": "00101e2f",
+        "callee_func": "memset"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "recv",
+      "called_from_function": "FUN_00101d47"
+    }
+  },
+  {
+    "sink_function": "connect",
+    "sink_location": "00101e6e",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101d47",
+        "call_location": "00101e6e",
+        "callee_func": "connect"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "recv",
+      "called_from_function": "FUN_00101d47"
+    }
+  },
+  {
+    "sink_function": "__isoc99_sscanf",
+    "sink_location": "00101f89",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101d47",
+        "call_location": "00101f89",
+        "callee_func": "__isoc99_sscanf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "recv",
+      "called_from_function": "FUN_00101d47"
+    }
+  },
+  {
+    "sink_function": "strlen",
+    "sink_location": "0010208d",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101fe9",
+        "call_location": "0010208d",
+        "callee_func": "strlen"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "recv",
+      "called_from_function": "FUN_00101fe9"
+    }
+  },
+  {
+    "sink_function": "memset",
+    "sink_location": "001020d1",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101fe9",
+        "call_location": "001020d1",
+        "callee_func": "memset"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "recv",
+      "called_from_function": "FUN_00101fe9"
+    }
+  },
+  {
+    "sink_function": "connect",
+    "sink_location": "00102110",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101fe9",
+        "call_location": "00102110",
+        "callee_func": "connect"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "recv",
+      "called_from_function": "FUN_00101fe9"
+    }
+  },
+  {
+    "sink_function": "__isoc99_sscanf",
+    "sink_location": "0010222b",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101fe9",
+        "call_location": "0010222b",
+        "callee_func": "__isoc99_sscanf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "recv",
+      "called_from_function": "FUN_00101fe9"
+    }
+  },
+  {
+    "sink_function": "strlen",
+    "sink_location": "0010233c",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00102298",
+        "call_location": "0010233c",
+        "callee_func": "strlen"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "recv",
+      "called_from_function": "FUN_00102298"
+    }
+  },
+  {
+    "sink_function": "memset",
+    "sink_location": "00102380",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00102298",
+        "call_location": "00102380",
+        "callee_func": "memset"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "recv",
+      "called_from_function": "FUN_00102298"
+    }
+  },
+  {
+    "sink_function": "connect",
+    "sink_location": "001023bf",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00102298",
+        "call_location": "001023bf",
+        "callee_func": "connect"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "recv",
+      "called_from_function": "FUN_00102298"
+    }
+  },
+  {
+    "sink_function": "__isoc99_sscanf",
+    "sink_location": "001024da",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00102298",
+        "call_location": "001024da",
+        "callee_func": "__isoc99_sscanf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "recv",
+      "called_from_function": "FUN_00102298"
+    }
+  }
+]

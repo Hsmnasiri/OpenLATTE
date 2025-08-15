@@ -1,0 +1,39 @@
+[
+  {
+    "function": "recv",
+    "addr": "0x2",
+    "proto": "ssize_t recv(int __fd, void * __buf, size_t __n, int __flags)",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        2
+      ],
+      "answer": "(recv; 2)"
+    }
+  },
+  {
+    "function": "__libc_start_main",
+    "addr": "0x3",
+    "proto": "undefined __libc_start_main()",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        2,
+        3
+      ],
+      "answer": "(__libc_start_main; 2,3)"
+    }
+  },
+  {
+    "function": "time",
+    "addr": "0x11",
+    "proto": "time_t time(time_t * __timer)",
+    "source_result": {
+      "is_true": true,
+      "params": [
+        1
+      ],
+      "answer": "(time; 1)"
+    }
+  }
+]

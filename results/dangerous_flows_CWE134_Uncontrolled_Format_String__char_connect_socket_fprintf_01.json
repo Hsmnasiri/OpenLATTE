@@ -1,0 +1,437 @@
+[
+  {
+    "sink_function": "puts",
+    "sink_location": "00101507",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_001014e9",
+        "call_location": "00101507",
+        "callee_func": "puts"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "puts",
+      "called_from_function": "FUN_001014e9"
+    }
+  },
+  {
+    "sink_function": "wprintf",
+    "sink_location": "0010153c",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_0010150f",
+        "call_location": "0010153c",
+        "callee_func": "wprintf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "wprintf",
+      "called_from_function": "FUN_0010150f"
+    }
+  },
+  {
+    "sink_function": "printf",
+    "sink_location": "00101567",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101544",
+        "call_location": "00101567",
+        "callee_func": "printf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "printf",
+      "called_from_function": "FUN_00101544"
+    }
+  },
+  {
+    "sink_function": "printf",
+    "sink_location": "00101596",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_0010156f",
+        "call_location": "00101596",
+        "callee_func": "printf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "printf",
+      "called_from_function": "FUN_0010156f"
+    }
+  },
+  {
+    "sink_function": "printf",
+    "sink_location": "001015d1",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_0010159e",
+        "call_location": "001015d1",
+        "callee_func": "printf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "printf",
+      "called_from_function": "FUN_0010159e"
+    }
+  },
+  {
+    "sink_function": "printf",
+    "sink_location": "001015ff",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_001015d9",
+        "call_location": "001015ff",
+        "callee_func": "printf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "printf",
+      "called_from_function": "FUN_001015d9"
+    }
+  },
+  {
+    "sink_function": "printf",
+    "sink_location": "0010162d",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101607",
+        "call_location": "0010162d",
+        "callee_func": "printf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "printf",
+      "called_from_function": "FUN_00101607"
+    }
+  },
+  {
+    "sink_function": "printf",
+    "sink_location": "0010165b",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101635",
+        "call_location": "0010165b",
+        "callee_func": "printf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "printf",
+      "called_from_function": "FUN_00101635"
+    }
+  },
+  {
+    "sink_function": "printf",
+    "sink_location": "00101689",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101663",
+        "call_location": "00101689",
+        "callee_func": "printf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "printf",
+      "called_from_function": "FUN_00101663"
+    }
+  },
+  {
+    "sink_function": "printf",
+    "sink_location": "001016d2",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101691",
+        "call_location": "001016d2",
+        "callee_func": "printf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "printf",
+      "called_from_function": "FUN_00101691"
+    }
+  },
+  {
+    "sink_function": "printf",
+    "sink_location": "00101711",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_001016ee",
+        "call_location": "00101711",
+        "callee_func": "printf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "printf",
+      "called_from_function": "FUN_001016ee"
+    }
+  },
+  {
+    "sink_function": "printf",
+    "sink_location": "0010173f",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101719",
+        "call_location": "0010173f",
+        "callee_func": "printf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "printf",
+      "called_from_function": "FUN_00101719"
+    }
+  },
+  {
+    "sink_function": "printf",
+    "sink_location": "00101770",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101747",
+        "call_location": "00101770",
+        "callee_func": "printf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "printf",
+      "called_from_function": "FUN_00101747"
+    }
+  },
+  {
+    "sink_function": "printf",
+    "sink_location": "001017a6",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101778",
+        "call_location": "001017a6",
+        "callee_func": "printf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "printf",
+      "called_from_function": "FUN_00101778"
+    }
+  },
+  {
+    "sink_function": "printf",
+    "sink_location": "001017ee",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_001017ae",
+        "call_location": "001017ee",
+        "callee_func": "printf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "puts",
+      "called_from_function": "FUN_001017ae"
+    }
+  },
+  {
+    "sink_function": "puts",
+    "sink_location": "0010180c",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_001017ae",
+        "call_location": "0010180c",
+        "callee_func": "puts"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "puts",
+      "called_from_function": "FUN_001017ae"
+    }
+  },
+  {
+    "sink_function": "__isoc99_sscanf",
+    "sink_location": "0010186e",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101814",
+        "call_location": "0010186e",
+        "callee_func": "__isoc99_sscanf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "__isoc99_sscanf",
+      "called_from_function": "FUN_00101814"
+    }
+  },
+  {
+    "sink_function": "__isoc99_swscanf",
+    "sink_location": "00101979",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_0010191b",
+        "call_location": "00101979",
+        "callee_func": "__isoc99_swscanf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "__isoc99_swscanf",
+      "called_from_function": "FUN_0010191b"
+    }
+  },
+  {
+    "sink_function": "pthread_create",
+    "sink_location": "00101bba",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101b3a",
+        "call_location": "00101bba",
+        "callee_func": "pthread_create"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "pthread_create",
+      "called_from_function": "FUN_00101b3a"
+    }
+  },
+  {
+    "sink_function": "pthread_join",
+    "sink_location": "00101c37",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101c07",
+        "call_location": "00101c37",
+        "callee_func": "pthread_join"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "pthread_join",
+      "called_from_function": "FUN_00101c07"
+    }
+  },
+  {
+    "sink_function": "inet_addr",
+    "sink_location": "00101e64",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101d67",
+        "call_location": "00101e64",
+        "callee_func": "inet_addr"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "fprintf",
+      "called_from_function": "FUN_00101d67"
+    }
+  },
+  {
+    "sink_function": "connect",
+    "sink_location": "00101e8e",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101d67",
+        "call_location": "00101e8e",
+        "callee_func": "connect"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "fprintf",
+      "called_from_function": "FUN_00101d67"
+    }
+  },
+  {
+    "sink_function": "recv",
+    "sink_location": "00101eca",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101d67",
+        "call_location": "00101eca",
+        "callee_func": "recv"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "fprintf",
+      "called_from_function": "FUN_00101d67"
+    }
+  },
+  {
+    "sink_function": "fprintf",
+    "sink_location": "00101fa2",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101d67",
+        "call_location": "00101fa2",
+        "callee_func": "fprintf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "fprintf",
+      "called_from_function": "FUN_00101d67"
+    }
+  },
+  {
+    "sink_function": "fprintf",
+    "sink_location": "0010207d",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00101fbe",
+        "call_location": "0010207d",
+        "callee_func": "fprintf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "fprintf",
+      "called_from_function": "FUN_00101fbe"
+    }
+  },
+  {
+    "sink_function": "inet_addr",
+    "sink_location": "00102196",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00102099",
+        "call_location": "00102196",
+        "callee_func": "inet_addr"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "fprintf",
+      "called_from_function": "FUN_00102099"
+    }
+  },
+  {
+    "sink_function": "connect",
+    "sink_location": "001021c0",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00102099",
+        "call_location": "001021c0",
+        "callee_func": "connect"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "fprintf",
+      "called_from_function": "FUN_00102099"
+    }
+  },
+  {
+    "sink_function": "recv",
+    "sink_location": "001021fc",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00102099",
+        "call_location": "001021fc",
+        "callee_func": "recv"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "fprintf",
+      "called_from_function": "FUN_00102099"
+    }
+  },
+  {
+    "sink_function": "fprintf",
+    "sink_location": "001022db",
+    "flow_trace": [
+      {
+        "caller_func": "FUN_00102099",
+        "call_location": "001022db",
+        "callee_func": "fprintf"
+      }
+    ],
+    "source_info": {
+      "source_function_called": "fprintf",
+      "called_from_function": "FUN_00102099"
+    }
+  }
+]
