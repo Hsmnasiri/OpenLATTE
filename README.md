@@ -62,16 +62,3 @@ Several scripts expect environment variables such as `GOOGLE_API_KEY` or `GOOGLE
        --output results/vulnerability_reports.json
    ```
 
-## Retrieval‑augmented mode
-
-This step has not been implemented yet, and we are working on the Knowledge base creation. After that, we will embed data and implement the retrieval mechanism, and integrate it into the inspect_flows_with_llm.py step.
-
-## Knowledge base generation
-
-in folder RAG_KB, we have implemented some scripts that create a KB based on some samples in the Juliet test suite to find a decompiled pair of good and bad code flows for every sample with llm annotations for semantic, root cause, and patched description, similar Vul-RAG paper but apply their work on a binary level. 
-
-## Notes
-
-File and directory paths inside the shell scripts (e.g. `GHIDRA_ROOT` in `DF.sh`) are hard coded and may need modification to match your local setup.
-
-Happy hacking!
